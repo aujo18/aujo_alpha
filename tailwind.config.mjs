@@ -7,9 +7,6 @@ export default {
         'playfair': ['"Playfair Display"', 'serif'],
         'inter': ['Inter', 'sans-serif'],
       },
-      colors: {
-        link: '#475749',
-      },
     },
   },
   plugins: [],
