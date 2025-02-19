@@ -74,9 +74,7 @@ T'es la, t'es la dernière
 Au revoir`
       }
     ]
-  }
-  
-  /*,
+  },
   {
     id: "laube-nouvelle",
     title: "L'Aube Nouvelle",
@@ -148,5 +146,5 @@ Une danse éternelle
 Sur la mer sereine`
       }
     ]
-  } */
+  } 
 ];
