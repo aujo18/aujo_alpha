@@ -15,7 +15,7 @@ export const albums: Album[] = [
   {
     id: "dans-la-nuit",
     title: "Dans la Nuit",
-    coverImage: "https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=2070",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971654/Aujo/krctyn0gejpupks8h0nj.jpg?q=80&w=2070",
     spotifyUrl: "https://open.spotify.com/album/placeholder",
     songs: [
       {
