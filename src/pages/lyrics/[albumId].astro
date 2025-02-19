@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { albums } from '../../data/albums';
+
+export function getStaticPaths() {
+  return albums.map(album => ({
+    params: { albumId: album.id },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+---
+
+<Layout title={`${album.title} - Paroles`}>
+  <Navigation />
+  <main class="pt-24 pb-20">
+    <div class="container mx-auto px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex flex-col md:flex-row gap-8 mb-12">
+          <div class="md:w-1/3">
+            <img
+              src={album.coverImage}
+              alt={`Album Cover - ${album.title}`}
+              class="w-full aspect-square object-cover rounded-lg"
+            />
+          </div>
+          <div class="md:w-2/3">
+            <h1 class="font-playfair text-4xl md:text-5xl text-neutral-900 mb-8">{album.title}</h1>
+            <div class="space-y-4">
+              {album.songs.map((song, index) => (
+                <div class="border border-neutral-200 rounded-lg">
+                  <button
+                    class="w-full px-6 py-4 bg-white hover:bg-neutral-50 transition-colors duration-300 flex items-center justify-between text-left"
+                    onclick={`
+                      const lyrics = document.getElementById('lyrics-${index}');
+                      const allLyrics = document.querySelectorAll('[id^="lyrics-"]');
+                      const currentIcon = this.querySelector('svg');
+                      const allIcons = document.querySelectorAll('[id^="icon-"]');
+                      
+                      allLyrics.forEach(el => {
+                        if (el.id !== 'lyrics-${index}') {
+                          el.classList.add('hidden');
+                        }
+                      });
+                      
+                      allIcons.forEach(icon => {
+                        icon.style.transform = 'rotate(0deg)';
+                      });
+                      
+                      lyrics.classList.toggle('hidden');
+                      
+                      if (!lyrics.classList.contains('hidden')) {
+                        currentIcon.style.transform = 'rotate(180deg)';
+                      } else {
+                        currentIcon.style.transform = 'rotate(0deg)';
+                      }
+                    `}
+                  >
+                    <span class="text-lg font-semibold text-neutral-900">{song.title}</span>
+                    <svg
+                      id={`icon-${index}`}
+                      class="w-5 h-5 text-neutral-500 transition-transform duration-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <div
+                    id={`lyrics-${index}`}
+                    class="hidden px-6 py-4 bg-neutral-50 border-t border-neutral-200"
+                  >
+                    <div class="max-h-96 overflow-y-auto">
+                      <pre class="whitespace-pre-wrap font-inter text-neutral-700">{song.lyrics}</pre>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a
+            href="/"
+            class="inline-block px-6 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors duration-300"
+          >
+            Retour à l'accueil
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  button:focus {
+    outline: 2px solid #059669;
+    outline-offset: -2px;
+  }
+
+  .max-h-96 {
+    scrollbar-width: thin;
+    scrollbar-color: #9CA3AF transparent;
+  }
+
+  .max-h-96::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .max-h-96::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .max-h-96::-webkit-scrollbar-thumb {
+    background-color: #9CA3AF;
+    border-radius: 3px;
+  }
+</style>

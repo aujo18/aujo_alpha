@@ -1,0 +1,41 @@
+<section id="concerts" class="py-20 bg-neutral-50">
+  <div class="container mx-auto px-6">
+    <h2 class="font-playfair text-4xl md:text-5xl text-center mb-16 text-neutral-900">Concerts à Venir</h2>
+    <div class="max-w-3xl mx-auto space-y-6">
+      {[
+        {
+          date: "15 Mars 2024",
+          venue: "Théâtre Le National",
+          city: "Montréal, QC",
+          ticketLink: "#"
+        },
+        {
+          date: "22 Mars 2024",
+          venue: "Le Grand Théâtre",
+          city: "Québec, QC",
+          ticketLink: "#"
+        },
+        {
+          date: "5 Avril 2024",
+          venue: "Centre National des Arts",
+          city: "Ottawa, ON",
+          ticketLink: "#"
+        }
+      ].map(concert => (
+        <div class="flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg border border-neutral-200">
+          <div>
+            <p class="text-xl font-bold text-neutral-900">{concert.date}</p>
+            <p class="text-neutral-600">{concert.venue}</p>
+            <p class="text-neutral-500">{concert.city}</p>
+          </div>
+          <a
+            href={concert.ticketLink}
+            class="mt-4 md:mt-0 px-6 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors duration-300"
+          >
+            Billets
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
