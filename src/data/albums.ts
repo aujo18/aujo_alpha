@@ -13,38 +13,65 @@ export interface Album {
 
 export const albums: Album[] = [
   {
-    id: "dans-la-nuit",
-    title: "Dans la Nuit",
+    id: "la-derniere",
+    title: "La dernière",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971654/Aujo/krctyn0gejpupks8h0nj.jpg?q=80&w=2070",
-    spotifyUrl: "https://open.spotify.com/album/placeholder",
+    spotifyUrl: "https://bfan.link/la-derniere",
     songs: [
       {
-        title: "Dans la Nuit",
-        lyrics: `Verse 1
-Dans la nuit silencieuse
-Les étoiles brillent pour nous
-Le temps s'arrête, précieuse
-Cette mélodie entre nous
+        title: "La dernière",
+        lyrics: `Tu m'utilisais pour tes devoirs d'université,
+J'avoue, j'ai rien vu venir,
+Shame on me
+Je croyais que tes malices du passé
+Avaient décidé de s'enfuir
 
-Chorus
-Dans la nuit, dans la nuit
-Nos rêves prennent leur envol
-Dans la nuit, dans la nuit
-La musique nous console`
-      },
-      {
-        title: "Rêverie Nocturne",
-        lyrics: `Verse 1
-Les ombres dansent ce soir
-Sur les murs de la ville
-Nos cœurs pleins d'espoir
-Dans ce moment tranquille
+Ohhh,
+Dommage, ta mère m'aimait bien,
+Elle m'écoutait à la radio
+Scander mes peines d'amour
+Et mes états d'âme moroses
 
-Chorus
-La nuit nous appartient
-Les étoiles sont nos guides
-Tout devient si lointain
-Dans ce moment limpide`
+T'es la, t'es la dernière à m'avoir
+Dorénavant, j'vais me méfier de ce regard
+It's a shame that I still miss you sometimes
+T'es la, t'es la dernière
+Au revoir
+
+Okay, round two.
+T'es comme la shisha :
+Je dis jamais non, même si, au fond, j'aime pas ça.
+Comme un tool,
+
+Tu t'es servi de moi.
+Am I a fool ?
+La marionnette au bout de tes doigts.
+J'te souhaite pas de mal,
+Non, c'est pas mon genre.
+Le karma fait sa loi,
+C'est une question de temps.
+
+T'es la, t'es la dernière à m'avoir
+Dorénavant, j'vais me méfier de ce regard
+It's a shame that I still miss you sometimes
+T'es la, t'es la dernière
+Au revoir
+
+It's your loss, baby,
+Tu perds, je gagne.
+Y'a 10 ans, j'étais faite pour toi,
+Le futur a d'autres plans pour moi.
+Ce beat est la trame sonore
+Qui marque la fin de notre histoire.
+On a changé, on a tué la magie.
+Sans rancune, 3, 2, 1…
+Je t'oublie
+
+T'es la, t'es la dernière à m'avoir
+Dorénavant, j'vais me méfier de ce regard
+It's a shame that I still miss you sometimes
+T'es la, t'es la dernière
+Au revoir`
       }
     ]
   },
