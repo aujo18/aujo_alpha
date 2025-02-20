@@ -25,7 +25,6 @@ J'avoue, j'ai rien vu venir,
 Shame on me
 Je croyais que tes malices du passé
 Avaient décidé de s'enfuir
-
 Ohhh,
 Dommage, ta mère m'aimait bien,
 Elle m'écoutait à la radio
@@ -42,7 +41,6 @@ Okay, round two.
 T'es comme la shisha :
 Je dis jamais non, même si, au fond, j'aime pas ça.
 Comme un tool,
-
 Tu t'es servi de moi.
 Am I a fool ?
 La marionnette au bout de tes doigts.
