@@ -3,5 +3,5 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://www.votre-site.com',
+  site: 'https://www.aujo.ca',
 });
