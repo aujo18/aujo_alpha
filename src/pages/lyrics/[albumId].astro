@@ -13,10 +13,10 @@ export function getStaticPaths() {
 const { album } = Astro.props;
 const title = `${album.title} - Paroles | Aujo`;
 const description = `Découvrez les paroles des chansons de l'album ${album.title} par Aujo.`;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = `${Astro.site}/lyrics/${album.id}/`;
 ---
 
-<Layout title={title} description={description} canonicalURL={canonicalURL.href}>
+<Layout title={title} description={description} canonicalURL={canonicalURL}>
   <Navigation />
   <main class="pt-24 pb-20">
     <div class="container mx-auto px-6">

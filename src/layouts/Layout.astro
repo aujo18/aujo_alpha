@@ -8,11 +8,11 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description: string;
-  canonicalURL: string;
+  canonicalURL?: string;
   image?: string;
 }
 
-const { title, description, canonicalURL, image = '/placeholder-social.jpg' } = Astro.props;
+const { title, description, canonicalURL = Astro.url.href, image = '/placeholder-social.jpg' } = Astro.props;
 ---
 
 <!doctype html>
