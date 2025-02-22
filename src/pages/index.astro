@@ -5,9 +5,13 @@ import Hero from '../components/Hero.astro';
 import Music from '../components/Music.astro';
 import Concerts from '../components/Concerts.astro';
 import Contact from '../components/Contact.astro';
+
+const title = "Aujo | Auteure - Compositrice - Interprète";
+const description = "Découvrez Aujo, auteure-compositrice-interprète. Explorez sa musique, ses paroles et ses spectacles à venir.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<Layout title="Aujo | Auteure - Compositrice - Interprète">
+<Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
   <main>
     <Hero />
