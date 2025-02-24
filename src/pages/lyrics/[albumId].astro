@@ -107,9 +107,17 @@ const canonicalURL = `${Astro.site}/lyrics/${album.id}/`;
         <div class="text-center">
           <a
             href="/#musique"
-            class="px-6 py-2 bg-white text-primary-600 rounded border border-primary-600 hover:bg-primary-50 transition-colors duration-300"
+            class="inline-flex items-center gap-2 px-6 py-2 bg-white text-primary-600 rounded border border-primary-600 hover:bg-primary-50 transition-colors duration-300"
           >
-            Retour à musique
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Retour
           </a>
         </div>
       </div>
