@@ -1,12 +1,25 @@
 <section id="accueil" class="min-h-screen flex items-center justify-center relative overflow-hidden">
   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10"></div>
-  <div class="absolute inset-0">
-    <img
-      src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971664/Aujo/vfbmv044jb9dgukbc8pm.jpg?q=80&w=2070"
-      alt="Artiste en performance"
-      class="w-full h-full object-cover opacity-80"
-    />
+  
+  <!-- Slider container -->
+  <div class="slider-container absolute inset-0">
+    <!-- Images du slider -->
+    <div class="slider-image absolute inset-0 w-full h-full opacity-100 transition-opacity duration-1500 ease-in-out">
+      <img 
+        src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971664/Aujo/vfbmv044jb9dgukbc8pm.jpg?q=80&w=2070"
+        alt="Artiste en performance"
+        class="w-full h-full object-cover opacity-80"
+      />
+    </div>
+    <div class="slider-image absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1500 ease-in-out">
+      <img 
+        src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1741020578/Aujo/cgysbu9ue4yxat96uv5s.jpg"
+        alt="Aujo"
+        class="w-full h-full object-cover opacity-80"
+      />
+    </div>
   </div>
+  
   <div class="relative z-20 text-center px-4">
     <img 
       src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1739975100/Aujo/fj5mfdz7gi0lb3rn3wy6.png?q=180&w=600"
@@ -16,3 +29,37 @@
     <p class="text-xl md:text-2xl text-neutral-600 font-archivo">Auteure • Compositrice • Interprète</p>
   </div>
 </section>
+
+<script>
+  // Script pour alterner les images
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.slider-image');
+    let currentIndex = 0;
+    
+    // Fonction pour alterner les images
+    function cycleImages() {
+      // Masquer toutes les images
+      images.forEach(image => {
+        image.classList.remove('opacity-100');
+        image.classList.add('opacity-0');
+      });
+      
+      // Afficher l'image courante
+      images[currentIndex].classList.remove('opacity-0');
+      images[currentIndex].classList.add('opacity-100');
+      
+      // Passer à l'image suivante
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+    
+    // Démarrer le cycle toutes les 5 secondes
+    setInterval(cycleImages, 5000);
+  });
+</script>
+
+<style>
+  /* Assurer que les transitions sont fluides */
+  .slider-image {
+    transition: opacity 1.5s ease-in-out;
+  }
+</style>
