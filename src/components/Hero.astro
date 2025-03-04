@@ -27,6 +27,22 @@
       class="inline-block w-full max-w-lg md:max-w-2xl mb-8"
     />
     <p class="text-xl md:text-2xl text-neutral-600 font-archivo">Auteure • Compositrice • Interprète</p>
+    
+    <!-- Navigation du slider -->
+    <div class="slider-nav flex justify-center items-center space-x-8 mt-8">
+      <button id="prev-slide" class="slider-nav-btn p-2 text-neutral-600 hover:text-primary-600 transition-colors duration-300 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        <span class="sr-only">Image précédente</span>
+      </button>
+      <button id="next-slide" class="slider-nav-btn p-2 text-neutral-600 hover:text-primary-600 transition-colors duration-300 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="sr-only">Image suivante</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -34,26 +50,62 @@
   // Script pour alterner les images
   document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('.slider-image');
+    const prevBtn = document.getElementById('prev-slide');
+    const nextBtn = document.getElementById('next-slide');
     let currentIndex = 0;
+    let intervalId;
     
-    // Fonction pour alterner les images
-    function cycleImages() {
+    // Fonction pour afficher une image spécifique
+    function showImage(index) {
       // Masquer toutes les images
       images.forEach(image => {
         image.classList.remove('opacity-100');
         image.classList.add('opacity-0');
       });
       
-      // Afficher l'image courante
-      images[currentIndex].classList.remove('opacity-0');
-      images[currentIndex].classList.add('opacity-100');
+      // Afficher l'image demandée
+      images[index].classList.remove('opacity-0');
+      images[index].classList.add('opacity-100');
       
-      // Passer à l'image suivante
-      currentIndex = (currentIndex + 1) % images.length;
+      // Mettre à jour l'index courant
+      currentIndex = index;
     }
     
-    // Démarrer le cycle toutes les 10 secondes
-    setInterval(cycleImages, 10000);
+    // Fonction pour passer à l'image suivante
+    function nextImage() {
+      const newIndex = (currentIndex + 1) % images.length;
+      showImage(newIndex);
+    }
+    
+    // Fonction pour passer à l'image précédente
+    function prevImage() {
+      const newIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(newIndex);
+    }
+    
+    // Fonction pour redémarrer l'intervalle
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextImage, 10000);
+    }
+    
+    // Ajouter les écouteurs d'événements aux boutons
+    nextBtn.addEventListener('click', () => {
+      nextImage();
+      resetInterval();
+    });
+    
+    prevBtn.addEventListener('click', () => {
+      prevImage();
+      resetInterval();
+    });
+    
+    // Démarrer immédiatement la première transition
+    setTimeout(() => {
+      nextImage();
+      // Puis continuer avec l'intervalle normal
+      intervalId = setInterval(nextImage, 10000);
+    }, 1000); // Attendre 1 seconde après le chargement pour la première transition
   });
 </script>
 
@@ -61,5 +113,21 @@
   /* Assurer que les transitions sont fluides */
   .slider-image {
     transition: opacity 1.5s ease-in-out;
+  }
+  
+  /* Style pour les boutons de navigation */
+  .slider-nav-btn {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .slider-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
   }
 </style>
