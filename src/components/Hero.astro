@@ -29,15 +29,15 @@
     <p class="text-xl md:text-2xl text-neutral-600 font-archivo">Auteure • Compositrice • Interprète</p>
     
     <!-- Navigation du slider -->
-    <div class="slider-nav flex justify-center items-center space-x-8 mt-8">
+    <div class="slider-nav flex justify-center items-center space-x-4 mt-6">
       <button id="prev-slide" class="slider-nav-btn p-2 text-neutral-600 hover:text-primary-600 transition-colors duration-300 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
         </svg>
         <span class="sr-only">Image précédente</span>
       </button>
       <button id="next-slide" class="slider-nav-btn p-2 text-neutral-600 hover:text-primary-600 transition-colors duration-300 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
         </svg>
         <span class="sr-only">Image suivante</span>
@@ -117,17 +117,17 @@
   
   /* Style pour les boutons de navigation */
   .slider-nav-btn {
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
   
   .slider-nav-btn:hover {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
   }
 </style>
