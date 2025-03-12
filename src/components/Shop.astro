@@ -42,8 +42,22 @@ const baseUrl = import.meta.env.PROD
 <style>
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: 1fr; /* Une seule colonne par défaut (mobile) */
     gap: 2.5rem;
+  }
+  
+  /* Tablette : 2 colonnes */
+  @media (min-width: 640px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Desktop : exactement 3 colonnes */
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   
   .product-card {
