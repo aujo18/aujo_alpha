@@ -17,11 +17,12 @@ const siteUrl = Astro.url.origin;
     publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
     loadStrategy: "on-user-interaction",
     modalStyle: "side",
-    version: "3.0"
+    version: "3.0",
+    currency: "cad"
   };
   
   // Script de chargement officiel
-  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m=window.SnipcartSettings.loadCSS;window.SnipcartSettings.loadCSS=!0;var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.type="text/javascript";h.async=!0;h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";f.parentNode.insertBefore(h,f);})();
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="cad");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m=window.SnipcartSettings.loadCSS;window.SnipcartSettings.loadCSS=!0;var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.type="text/javascript";h.async=!0;h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";f.parentNode.insertBefore(h,f);})();
 </script>
 <link rel="preconnect" href="https://cdn.snipcart.com">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
@@ -71,7 +72,7 @@ const siteUrl = Astro.url.origin;
           <span class="flex items-center">
             <span class="snipcart-items-count mr-1">0</span> 
             article(s) - 
-            <span class="ml-1 snipcart-total-price">0,00 €</span>
+            <span class="ml-1 snipcart-total-price">0,00 $</span>
           </span>
         </button>
       </div>
