@@ -4,6 +4,38 @@ import Navigation from '../components/Navigation.astro';
 import Contact from '../components/Contact.astro';
 import Shop from '../components/Shop.astro';
 
+// Définir les produits ici aussi pour pouvoir les utiliser dans la div de crawling
+const products = [
+  {
+    id: "album-premier",
+    name: "Premier Album",
+    price: 15.99,
+    description: "Album physique avec livret de paroles",
+    image: "/images/album-cover.jpg"
+  },
+  {
+    id: "t-shirt-tour",
+    name: "T-shirt Tournée",
+    price: 24.99,
+    description: "T-shirt officiel de la tournée 2023",
+    image: "/images/tshirt.jpg"
+  },
+  {
+    id: "tote-bag",
+    name: "Tote Bag",
+    price: 12.99,
+    description: "Sac en toile avec design exclusif",
+    image: "/images/totebag.jpg"
+  },
+  {
+    id: "poster-signature",
+    name: "Poster dédicacé",
+    price: 19.99,
+    description: "Poster A3 avec signature authentique",
+    image: "/images/poster.jpg"
+  }
+];
+
 const title = "Aujo | Boutique";
 const description = "Boutique officielle d'Aujo. Achetez des albums, des merchandising et d'autres produits exclusifs.";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,7 +53,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   
   <!-- Div Snipcart pour le crawling -->
   <div hidden id="snipcart-product-templates">
-    {products.map(product => (
+    {products.map((product) => (
       <div id={`snipcart-template-${product.id}`} data-item-id={product.id}>
         <h2>{product.name}</h2>
         <p>{product.description}</p>
