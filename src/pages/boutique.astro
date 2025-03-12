@@ -15,57 +15,21 @@ const siteUrl = Astro.url.origin;
 <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 
-<!-- Styles pour gérer l'overlay et le positionnement -->
+<!-- Style minimaliste pour s'assurer que le checkout est visible -->
 <style is:global>
-  /* Overlay complet */
-  .snipcart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999998 !important;
-    display: none; /* Assurez-vous que l'overlay est caché par défaut */
+  /* Z-index seulement pour Snipcart */
+  #snipcart {
+    z-index: 100000 !important;
   }
-
-  /* Afficher l'overlay lorsque le panier est ouvert */
-  .snipcart-overlay--visible {
-    display: block; /* L'overlay doit être visible uniquement lorsque le panier est ouvert */
+  
+  /* Correction pour les boutons */
+  .snipcart-add-item, .snipcart-checkout {
+    cursor: pointer;
   }
-
-  /* Positionnement et z-index des éléments Snipcart */
-  .snipcart-modal,
-  .snipcart-checkout-page,
-  .snipcart-cart,
-  #snipcart,
-  .snipcart-modal__container {
-    z-index: 999999 !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Diminuer le z-index du menu de navigation */
+  
+  /* Z-index du header fixe */
   header.fixed {
-    z-index: 100 !important;
-    position: relative;
-  }
-
-  /* Gestion du défilement */
-  body.snipcart-checkout-visible,
-  body.snipcart-sidecart--opened {
-    overflow: hidden;
-  }
-
-  /* S'assurer que les boutons sont cliquables */
-  .snipcart-add-item,
-  .snipcart-checkout {
-    position: relative;
-    z-index: 1;
-    pointer-events: auto;
+    z-index: 50 !important;
   }
 </style>
 
@@ -93,76 +57,16 @@ const siteUrl = Astro.url.origin;
 <!-- Conteneur Snipcart -->
 <div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
-<!-- Script de débogage -->
+<!-- Script de débogage minimal -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
     
-    // Vérifier si Snipcart est chargé
-    const checkSnipcart = () => {
-      if (window.Snipcart) {
-        console.log('Snipcart is loaded and ready');
-        return true;
-      }
-      console.log('Snipcart not yet loaded');
-      return false;
-    };
-    
-    // Vérifier régulièrement si Snipcart est chargé
-    const interval = setInterval(() => {
-      if (checkSnipcart()) {
-        clearInterval(interval);
-      }
-    }, 500);
-    
-    // Écouter les événements Snipcart
-    document.addEventListener('snipcart.ready', () => {
-      console.log('Snipcart ready event fired');
-    });
-    
-    document.addEventListener('snipcart.error', (error) => {
-      console.error('Snipcart error:', error);
-    });
-
-    // Gérer l'affichage de l'overlay
-    document.addEventListener('snipcart.open', () => {
-      document.querySelector('.snipcart-overlay').classList.add('snipcart-overlay--visible');
-    });
-
-    document.addEventListener('snipcart.close', () => {
-      document.querySelector('.snipcart-overlay').classList.remove('snipcart-overlay--visible');
-    });
-
-    const cartButton = document.querySelector('.snipcart-checkout');
-    
-    if (cartButton) {
-      cartButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Cart button clicked');
-      });
-    }
-
-    // Ajoutez un gestionnaire d'événements pour les boutons d'ajout au panier
-    const addItemButtons = document.querySelectorAll('.snipcart-add-item');
-    addItemButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Add item button clicked:', button.getAttribute('data-item-name'));
+    // Surveillez les clics sur les boutons pour déboguer
+    document.querySelectorAll('.snipcart-add-item, .snipcart-checkout').forEach(button => {
+      button.addEventListener('click', function(e) {
+        console.log('Button clicked:', this.className);
       });
     });
   });
-</script>
-
-<div class="container mx-auto mt-8 p-4 bg-gray-100 rounded-lg">
-  <h2 class="text-2xl mb-4">Test Bouton</h2>
-  <button
-    class="snipcart-add-item bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
-    data-item-id="test-item"
-    data-item-name="Article Test"
-    data-item-price="9.99"
-    data-item-url={siteUrl} 
-    data-item-description="Ceci est un article de test"
-  >
-    TESTER SNIPCART
-  </button>
-</div> 
+</script> 
