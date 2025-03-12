@@ -54,6 +54,36 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <link rel="preconnect" href="https://cdn.snipcart.com">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
+<!-- Après le script Snipcart mais avant le Layout -->
+<style is:global>
+  /* Augmenter le z-index des éléments Snipcart pour qu'ils soient au-dessus de tout */
+  .snipcart-modal,
+  .snipcart-checkout-page,
+  .snipcart-cart,
+  .snipcart-modal__container,
+  #snipcart-checkout-step-billing,
+  #snipcart {
+    z-index: 9999999 !important;
+  }
+  
+  /* Réduire légèrement le z-index de la navigation pour permettre à Snipcart d'apparaître par-dessus */
+  header.fixed {
+    z-index: 40 !important;
+  }
+  
+  /* Style de base pour le conteneur modal de Snipcart */
+  .snipcart-modal__container {
+    position: relative;
+    z-index: 9999999 !important;
+  }
+  
+  /* S'assurer que le corps du document ne bloque pas le modal */
+  body.snipcart-checkout-visible,
+  body.snipcart-sidecart--opened {
+    overflow: hidden;
+  }
+</style>
+
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
   <main>
