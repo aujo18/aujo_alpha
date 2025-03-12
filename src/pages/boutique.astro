@@ -55,8 +55,8 @@ const siteUrl = Astro.url.origin;
 </style>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
-  <!-- Navigation réintégrée -->
-  <Navigation />
+  <!-- Navigation réintégrée avec l'option non-fixe -->
+  <Navigation isFixed={false} />
   
   <main>
     <div class="container mx-auto px-4 py-12 mt-8">

@@ -1,5 +1,8 @@
 ---
 import CartButton from './CartButton.astro';
+// Ajouter une prop isFixed avec une valeur par défaut à true
+const { isFixed = true } = Astro.props;
+
 const links = [
   { href: "/", text: "ACCUEIL" },
   { href: "/#musique", text: "MUSIQUE" },
@@ -8,7 +11,8 @@ const links = [
 ];
 ---
 
-<header class="fixed w-full bg-white/80 backdrop-blur-sm z-50 border-b border-neutral-100">
+<!-- Utiliser une classe conditionnelle pour le header -->
+<header class={`w-full bg-white/80 backdrop-blur-sm z-50 border-b border-neutral-100 ${isFixed ? 'fixed' : ''}`}>
   <nav class="container mx-auto px-6 py-4">
     <ul class="flex justify-center space-x-8">
       {
