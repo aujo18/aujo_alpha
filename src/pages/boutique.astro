@@ -46,7 +46,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   window.SnipcartSettings = {
     publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
     loadStrategy: "on-user-interaction",
-    modalStyle: "side",
+    modalStyle: "full-page",
     version: "3.0",
   };
 
@@ -104,7 +104,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </Layout>
 
 <!-- Conteneur Snipcart -->
-<div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="side"></div>
+<div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="full-page"></div>
 
 <script>
   // Débogage amélioré
