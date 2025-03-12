@@ -41,6 +41,25 @@ const description = "Boutique officielle d'Aujo. Achetez des albums, des merchan
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
+<!-- Configuration Snipcart selon méthode officielle -->
+<script is:inline>
+  window.SnipcartSettings = {
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
+    loadStrategy: "on-user-interaction",
+    modalStyle: "side",
+  };
+
+  (function() {
+    var c, d;
+    (d = (c = window.SnipcartSettings).domain) != null || (c.domain = window.location.origin);
+    var s = document.createElement('script');
+    s.src = 'https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js';
+    s.async = true;
+    document.body.appendChild(s);
+  })();
+</script>
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.css" />
+
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
   <main>
@@ -79,9 +98,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </div>
 </Layout>
 
-<script is:inline>
-  import { loadSnipcart } from "../js/snipcart";
+<!-- Conteneur Snipcart -->
+<div hidden id="snipcart" data-config-modal-style="side"></div>
+
+<script>
+  // Débogage des clics sur les boutons
   document.addEventListener('DOMContentLoaded', () => {
-    loadSnipcart();
+    console.log('DOM fully loaded');
+    
+    document.querySelectorAll('.snipcart-add-item').forEach(button => {
+      button.addEventListener('click', (e) => {
+        console.log('Button clicked:', e.currentTarget.getAttribute('data-item-name'));
+      });
+    });
+  });
+  
+  document.addEventListener('snipcart.ready', () => {
+    console.log('Snipcart ready!');
   });
 </script> 
