@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// Nous ne chargeons plus le composant Navigation
+import Navigation from '../components/Navigation.astro';
 import Contact from '../components/Contact.astro';
 import Shop from '../components/Shop.astro';
 
@@ -26,31 +26,25 @@ const siteUrl = Astro.url.origin;
 <link rel="preconnect" href="https://cdn.snipcart.com">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
-<!-- Style simplifié pour Snipcart et le bouton retour -->
+<!-- Style pour Snipcart avec z-index très élevés -->
 <style is:global>
-  /* Z-index pour Snipcart */
+  /* Z-index très élevés pour Snipcart */
   #snipcart,
   .snipcart-modal,
   .snipcart-cart,
   .snipcart-checkout-page {
-    z-index: 9999 !important;
+    z-index: 9999999 !important; /* Z-index extrêmement élevé */
   }
   
-  /* Styles pour le bouton retour */
-  .back-button {
-    position: fixed;
-    top: 1.5rem;
-    left: 1.5rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    padding: 0.75rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 40;
-    transition: transform 0.2s ease-in-out;
+  /* Diminuer le z-index du header fixe */
+  header.fixed {
+    z-index: 50 !important;
   }
   
-  .back-button:hover {
-    transform: scale(1.1);
+  /* Gestion du défilement */
+  body.snipcart-checkout-visible,
+  body.snipcart-sidecart--opened {
+    overflow: hidden;
   }
   
   /* Styles de base */
@@ -61,12 +55,8 @@ const siteUrl = Astro.url.origin;
 </style>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
-  <!-- Bouton retour à la place de la navigation -->
-  <a href="/" class="back-button">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-    </svg>
-  </a>
+  <!-- Navigation réintégrée -->
+  <Navigation />
   
   <main>
     <div class="container mx-auto px-4 py-12 mt-8">
@@ -97,7 +87,12 @@ const siteUrl = Astro.url.origin;
 <!-- Script minimal pour Snipcart -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('Boutique page loaded without navigation menu');
+    console.log('Boutique page loaded with navigation menu');
+    
+    // Forcer le checkout Snipcart à passer au-dessus de la navigation
+    document.addEventListener('snipcart.ready', () => {
+      console.log('Snipcart is ready - ensuring modal appears above navigation');
+    });
     
     // Surveiller les clics sur les boutons
     document.querySelectorAll('.snipcart-add-item, .snipcart-checkout').forEach(button => {
