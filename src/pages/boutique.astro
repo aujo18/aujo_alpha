@@ -11,6 +11,21 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
+<!-- Configuration Snipcart améliorée -->
+<script is:inline>
+  window.SnipcartSettings = {
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
+    loadStrategy: "on-user-interaction",
+    modalStyle: "side",
+    version: "3.0"
+  };
+  
+  // Script de chargement officiel
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m=window.SnipcartSettings.loadCSS;window.SnipcartSettings.loadCSS=!0;var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.type="text/javascript";h.async=!0;h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";f.parentNode.insertBefore(h,f);})();
+</script>
+<link rel="preconnect" href="https://cdn.snipcart.com">
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
+
 <!-- Style simplifié pour Snipcart et le bouton retour -->
 <style is:global>
   /* Z-index pour Snipcart */
@@ -76,8 +91,8 @@ const siteUrl = Astro.url.origin;
   <Contact />
 </Layout>
 
-<!-- Conteneur Snipcart -->
-<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
+<!-- Conteneur Snipcart avec attributs corrects -->
+<div hidden id="snipcart" data-config-modal-style="side" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
 <!-- Script minimal pour Snipcart -->
 <script>
@@ -91,18 +106,4 @@ const siteUrl = Astro.url.origin;
       });
     });
   });
-</script>
-
-<!-- Remplacer la section de chargement de Snipcart par ceci -->
-<script is:inline>
-  window.SnipcartSettings = {
-    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
-    modalStyle: "side"
-  };
-
-  (function(){var script = document.createElement('script');
-  script.src = 'https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js';
-  script.async = true;
-  document.body.appendChild(script);})();
-</script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" /> 
+</script> 
