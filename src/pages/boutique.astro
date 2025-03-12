@@ -11,10 +11,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
-<!-- Chargement officiel de Snipcart -->
-<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
-
 <!-- Style simplifié pour Snipcart et le bouton retour -->
 <style is:global>
   /* Z-index pour Snipcart */
@@ -62,12 +58,16 @@ const siteUrl = Astro.url.origin;
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
-        <!-- Bouton de panier standard -->
+        <!-- Bouton de panier avec affichage du prix -->
         <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span class="snipcart-items-count mr-2">0</span> articles
+          <span class="flex items-center">
+            <span class="snipcart-items-count mr-1">0</span> 
+            article(s) - 
+            <span class="ml-1 snipcart-total-price">0,00 €</span>
+          </span>
         </button>
       </div>
       <Shop siteUrl={siteUrl} />
@@ -91,4 +91,18 @@ const siteUrl = Astro.url.origin;
       });
     });
   });
-</script> 
+</script>
+
+<!-- Remplacer la section de chargement de Snipcart par ceci -->
+<script is:inline>
+  window.SnipcartSettings = {
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
+    modalStyle: "side"
+  };
+
+  (function(){var script = document.createElement('script');
+  script.src = 'https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js';
+  script.async = true;
+  document.body.appendChild(script);})();
+</script>
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" /> 
