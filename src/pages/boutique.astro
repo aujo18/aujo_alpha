@@ -42,12 +42,39 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
-<!-- Chargement officiel de Snipcart -->
-<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
+<!-- Configuration Snipcart ultra-minimaliste -->
+<script is:inline>
+  window.SnipcartSettings = {
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
+    version: "3.0"
+  };
 
-<!-- Conteneur Snipcart -->
-<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
+  // Chargement minimal de Snipcart
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://cdn.snipcart.com/themes/v3.0/default/snipcart.js';
+    s.async = true;
+    document.body.appendChild(s);
+  })();
+</script>
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
+
+<!-- Styles essentiels pour le checkout -->
+<style is:global>
+  /* S'assurer que le checkout est toujours visible */
+  .snipcart-modal,
+  .snipcart-checkout-page,
+  .snipcart-cart,
+  #snipcart {
+    z-index: 9999999 !important;
+    position: relative;
+  }
+  
+  /* Style du bouton de panier */
+  .cart-button {
+    cursor: pointer;
+  }
+</style>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
@@ -56,8 +83,8 @@ const siteUrl = Astro.url.origin;
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
-        <!-- Bouton de panier simplifié -->
-        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+        <!-- Bouton de panier avec gestion manuelle -->
+        <button id="cart-button" class="snipcart-checkout cart-button flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -68,41 +95,33 @@ const siteUrl = Astro.url.origin;
     </div>
   </main>
   <Contact />
-  
-  <!-- Div Snipcart pour le crawling -->
-  <div hidden id="snipcart-product-templates">
-    <div id="snipcart-template-album-premier" data-item-id="album-premier">
-      <h2>Premier Album</h2>
-      <p>Album physique avec livret de paroles</p>
-      <p>15.99 €</p>
-    </div>
-    
-    <div id="snipcart-template-t-shirt-tour" data-item-id="t-shirt-tour">
-      <h2>T-shirt Tournée</h2>
-      <p>T-shirt officiel de la tournée 2023</p>
-      <p>24.99 €</p>
-    </div>
-    
-    <div id="snipcart-template-tote-bag" data-item-id="tote-bag">
-      <h2>Tote Bag</h2>
-      <p>Sac en toile avec design exclusif</p>
-      <p>12.99 €</p>
-    </div>
-    
-    <div id="snipcart-template-poster-signature" data-item-id="poster-signature">
-      <h2>Poster dédicacé</h2>
-      <p>Poster A3 avec signature authentique</p>
-      <p>19.99 €</p>
-    </div>
-  </div>
 </Layout>
 
-<!-- Script de débogage -->
+<!-- Div Snipcart -->
+<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
+
+<!-- Script de gestion du panier -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded');
+    const cartButton = document.getElementById('cart-button');
     
-    // Vérifier si Snipcart est chargé
+    if (cartButton) {
+      // Gestionnaire d'événement manuel
+      cartButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Cart button clicked');
+        
+        // Vérifier si Snipcart est chargé
+        if (window.Snipcart) {
+          console.log('Snipcart is available, opening cart...');
+          window.Snipcart.api.cart.show();
+        } else {
+          console.error('Snipcart not available');
+        }
+      });
+    }
+    
+    // Vérifier l'état de Snipcart
     const checkSnipcart = () => {
       if (window.Snipcart) {
         console.log('Snipcart is loaded and ready');
@@ -118,15 +137,6 @@ const siteUrl = Astro.url.origin;
         clearInterval(interval);
       }
     }, 500);
-    
-    // Écouter les événements Snipcart
-    document.addEventListener('snipcart.ready', () => {
-      console.log('Snipcart ready event fired');
-    });
-    
-    document.addEventListener('snipcart.error', (error) => {
-      console.error('Snipcart error:', error);
-    });
   });
 </script>
 
