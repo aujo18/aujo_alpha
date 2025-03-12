@@ -17,19 +17,28 @@ const siteUrl = Astro.url.origin;
 
 <!-- Style minimaliste pour s'assurer que le checkout est visible -->
 <style is:global>
-  /* Z-index seulement pour Snipcart */
-  #snipcart {
-    z-index: 100000 !important;
+  /* Z-index pour Snipcart */
+  #snipcart,
+  .snipcart-modal,
+  .snipcart-cart,
+  .snipcart-checkout-page {
+    z-index: 10000000 !important;
   }
   
-  /* Correction pour les boutons */
-  .snipcart-add-item, .snipcart-checkout {
-    cursor: pointer;
+  /* Style pour le header lorsque Snipcart est ouvert */
+  header.snipcart-is-open {
+    display: none !important;
   }
   
-  /* Z-index du header fixe */
+  /* Style pour le header normal */
   header.fixed {
     z-index: 50 !important;
+  }
+  
+  /* Boutons cliquables */
+  .snipcart-add-item, 
+  .snipcart-checkout {
+    cursor: pointer;
   }
 </style>
 
@@ -57,10 +66,25 @@ const siteUrl = Astro.url.origin;
 <!-- Conteneur Snipcart -->
 <div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
-<!-- Script de débogage minimal -->
+<!-- Script pour masquer le header lorsque Snipcart est ouvert -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded');
+    // Surveiller quand Snipcart est prêt
+    document.addEventListener('snipcart.ready', () => {
+      console.log('Snipcart is ready');
+      
+      // Masquer le header quand le panier s'ouvre
+      document.addEventListener('snipcart.show', () => {
+        console.log('Snipcart opened - hiding header');
+        document.querySelector('header')?.classList.add('snipcart-is-open');
+      });
+      
+      // Réafficher le header quand le panier se ferme
+      document.addEventListener('snipcart.close', () => {
+        console.log('Snipcart closed - showing header');
+        document.querySelector('header')?.classList.remove('snipcart-is-open');
+      });
+    });
     
     // Surveillez les clics sur les boutons pour déboguer
     document.querySelectorAll('.snipcart-add-item, .snipcart-checkout').forEach(button => {
