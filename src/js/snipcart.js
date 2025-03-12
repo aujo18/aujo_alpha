@@ -19,10 +19,19 @@ export function loadSnipcart() {
     const snipcartDiv = document.createElement('div');
     snipcartDiv.hidden = true;
     snipcartDiv.id = 'snipcart';
-    // Remplacez YOUR_PUBLIC_API_KEY par votre clé API publique Snipcart
+    
+    // Clé API publique Snipcart
     snipcartDiv.setAttribute('data-api-key', 'MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0');
+    
     // Configuration pour afficher en mode pleine page
     snipcartDiv.setAttribute('data-config-modal-style', 'fullscreen');
+    
+    // Pour le mode test/développement
+    snipcartDiv.setAttribute('data-config-environment', 'development');
+    
+    // Permettre de voir l'ajout au panier en direct
+    snipcartDiv.setAttribute('data-config-live-update', 'true');
+    
     document.body.appendChild(snipcartDiv);
   }
 } 

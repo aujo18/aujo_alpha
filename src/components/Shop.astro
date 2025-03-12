@@ -53,7 +53,7 @@ const products = [
             data-item-id={product.id}
             data-item-name={product.name}
             data-item-price={product.price}
-            data-item-url={"/boutique"}
+            data-item-url={Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'}
             data-item-description={product.description}
             data-item-image={product.image}
           >

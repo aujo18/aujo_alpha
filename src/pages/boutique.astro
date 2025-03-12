@@ -18,9 +18,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </div>
   </main>
   <Contact />
+  
+  <!-- Div Snipcart pour le crawling -->
+  <div hidden id="snipcart-product-templates">
+    {products.map(product => (
+      <div id={`snipcart-template-${product.id}`} data-item-id={product.id}>
+        <h2>{product.name}</h2>
+        <p>{product.description}</p>
+        <p>{product.price} €</p>
+      </div>
+    ))}
+  </div>
 </Layout>
 
 <script is:inline>
   import { loadSnipcart } from "../js/snipcart";
-  loadSnipcart();
+  document.addEventListener('DOMContentLoaded', () => {
+    loadSnipcart();
+  });
 </script> 

@@ -1,4 +1,5 @@
 ---
+import CartButton from './CartButton.astro';
 const links = [
   { href: "/", text: "ACCUEIL" },
   { href: "/#musique", text: "MUSIQUE" },
@@ -22,6 +23,9 @@ const links = [
           </li>
         ))
       }
+      <li class="ml-4">
+        <CartButton />
+      </li>
     </ul>
   </nav>
 </header>
