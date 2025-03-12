@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Contact from '../components/Contact.astro';
+import Shop from '../components/Shop.astro';
+
+const title = "Aujo | Boutique";
+const description = "Boutique officielle d'Aujo. Achetez des albums, des merchandising et d'autres produits exclusifs.";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<Layout title={title} description={description} canonicalURL={canonicalURL.href}>
+  <Navigation />
+  <main>
+    <div class="container mx-auto px-4 py-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-12">Boutique</h1>
+      <Shop />
+    </div>
+  </main>
+  <Contact />
+</Layout>
+
+<script is:inline>
+  import { loadSnipcart } from "../js/snipcart";
+  loadSnipcart();
+</script> 
