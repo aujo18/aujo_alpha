@@ -31,7 +31,8 @@ const products = [
   }
 ];
 
-const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique';
+// Configuration constante pour tous les produits
+const siteUrl = "/"; // URL simple et cohérente
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -50,12 +51,12 @@ const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'
       <p class="text-gray-700 mb-4">Album physique avec livret de paroles</p>
       <div class="flex justify-between items-center">
         <span class="text-xl font-bold">15.99 €</span>
-        <button 
+        <button
           class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
           data-item-id="album-premier"
           data-item-name="Premier Album"
           data-item-price="15.99"
-          data-item-url="/"
+          data-item-url={siteUrl}
           data-item-description="Album physique avec livret de paroles"
         >
           Ajouter au panier
@@ -86,7 +87,6 @@ const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'
           data-item-price="24.99"
           data-item-url={siteUrl}
           data-item-description="T-shirt officiel de la tournée 2023"
-          data-item-image="/images/tshirt.jpg"
         >
           Ajouter au panier
         </button>
@@ -116,7 +116,6 @@ const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'
           data-item-price="12.99"
           data-item-url={siteUrl}
           data-item-description="Sac en toile avec design exclusif"
-          data-item-image="/images/totebag.jpg"
         >
           Ajouter au panier
         </button>
@@ -146,7 +145,6 @@ const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'
           data-item-price="19.99"
           data-item-url={siteUrl}
           data-item-description="Poster A3 avec signature authentique"
-          data-item-image="/images/poster.jpg"
         >
           Ajouter au panier
         </button>

@@ -87,8 +87,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </svg>
           <span class="flex items-center">
             <span class="snipcart-items-count mr-2">0</span>
-            articles - 
-            <span class="snipcart-total-price ml-2">0,00 €</span>
+            article(s) -
+            <span class="ml-2">
+              <span class="snipcart-total-price">0,00 €</span>
+            </span>
           </span>
         </button>
       </div>
@@ -129,7 +131,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="full-page"></div>
 
 <script>
-  // Débogage amélioré
+  // Débogage simplifié - suppression de la partie qui interférait avec Snipcart
   document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
     
@@ -142,42 +144,26 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       }
     }, 2000);
     
-    // Ajouter des listeners aux boutons
+    // Supprimer le gestionnaire personnalisé qui empêche le comportement par défaut
+    /*
     document.querySelectorAll('.snipcart-add-item').forEach(button => {
-      console.log('Found button:', button.getAttribute('data-item-name'));
-      
       button.addEventListener('click', (e) => {
-        e.preventDefault(); // Empêcher le comportement par défaut
-        console.log('Button clicked:', button.getAttribute('data-item-name'));
-        
-        // Vérifier si Snipcart API est prête
-        if (window.Snipcart) {
-          // Ajouter manuellement au panier
-          window.Snipcart.api.cart.items.add({
-            id: button.getAttribute('data-item-id'),
-            name: button.getAttribute('data-item-name'),
-            price: parseFloat(button.getAttribute('data-item-price')),
-            url: button.getAttribute('data-item-url') || window.location.href,
-            description: button.getAttribute('data-item-description')
-          }).then(() => {
-            console.log('Item added via API');
-          }).catch(error => {
-            console.error('Error adding item via API:', error);
-          });
-        } else {
-          console.error('Snipcart API not available');
-        }
+        e.preventDefault(); // Cette ligne empêche Snipcart de fonctionner correctement
+        // ...
       });
     });
+    */
   });
   
-  // Écouter l'événement ready de Snipcart
   document.addEventListener('snipcart.ready', () => {
     console.log('Snipcart ready event fired!');
     
-    // Vérifier si l'API est accessible
-    if (window.Snipcart && window.Snipcart.api) {
-      console.log('Snipcart API is available');
+    // Forcer une mise à jour du total après l'initialisation
+    if (window.Snipcart && window.Snipcart.store) {
+      // Cette ligne force la mise à jour des compteurs
+      window.Snipcart.store.subscribe(() => {
+        console.log('Snipcart store updated');
+      });
     }
   });
 </script> 
