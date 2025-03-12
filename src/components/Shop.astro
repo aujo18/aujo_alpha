@@ -31,8 +31,10 @@ const products = [
   }
 ];
 
-// Configuration constante pour tous les produits
-const siteUrl = "/"; // URL simple et cohérente
+// Configuration de base
+const baseUrl = import.meta.env.PROD 
+  ? "https://votredomaine.com/boutique" 
+  : "http://localhost:3000/boutique";
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -56,8 +58,9 @@ const siteUrl = "/"; // URL simple et cohérente
           data-item-id="album-premier"
           data-item-name="Premier Album"
           data-item-price="15.99"
-          data-item-url={siteUrl}
-          data-item-description="Album physique avec livret de paroles"
+          data-item-url={baseUrl}
+          data-item-quantity="1"
+          data-item-image="/images/album-cover.jpg"
         >
           Ajouter au panier
         </button>
@@ -85,8 +88,9 @@ const siteUrl = "/"; // URL simple et cohérente
           data-item-id="t-shirt-tour"
           data-item-name="T-shirt Tournée"
           data-item-price="24.99"
-          data-item-url={siteUrl}
-          data-item-description="T-shirt officiel de la tournée 2023"
+          data-item-url={baseUrl}
+          data-item-quantity="1"
+          data-item-image="/images/tshirt.jpg"
         >
           Ajouter au panier
         </button>
@@ -114,8 +118,9 @@ const siteUrl = "/"; // URL simple et cohérente
           data-item-id="tote-bag"
           data-item-name="Tote Bag"
           data-item-price="12.99"
-          data-item-url={siteUrl}
-          data-item-description="Sac en toile avec design exclusif"
+          data-item-url={baseUrl}
+          data-item-quantity="1"
+          data-item-image="/images/totebag.jpg"
         >
           Ajouter au panier
         </button>
@@ -143,8 +148,9 @@ const siteUrl = "/"; // URL simple et cohérente
           data-item-id="poster-signature"
           data-item-name="Poster dédicacé"
           data-item-price="19.99"
-          data-item-url={siteUrl}
-          data-item-description="Poster A3 avec signature authentique"
+          data-item-url={baseUrl}
+          data-item-quantity="1"
+          data-item-image="/images/poster.jpg"
         >
           Ajouter au panier
         </button>
