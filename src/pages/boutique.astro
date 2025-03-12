@@ -41,39 +41,18 @@ const description = "Boutique officielle d'Aujo. Achetez des albums, des merchan
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
-<!-- Configuration Snipcart simplifiée -->
-<script is:inline>
+<!-- Ajouter cette balise script en haut, avant Layout -->
+<script>
   window.SnipcartSettings = {
-    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
-    loadStrategy: "default", // Changé de "on-user-interaction" à "default"
-    modalStyle: "full-page",
-    defaultLang: "fr"
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"
   };
 
-  (function(){var s,c,t;s=document.createElement("script");s.src="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.js";s.async=true;document.body.appendChild(s);c=document.createElement("link");c.href="https://cdn.snipcart.com/themes/v3.4.0/default/snipcart.css";c.rel="stylesheet";document.head.appendChild(c);})();
+  // Chargement standard de Snipcart
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";h.async=true;f.parentNode.insertBefore(h,f);window.document.createElement("div").innerHTML="<style>.snipcart-modal__container{z-index:10000000}.snipcart-cart-button{z-index:99999}.snipcart *{font-family:sans-serif}</style>";})();
 </script>
-
-<!-- Ajout de styles personnalisés pour corriger les problèmes de z-index -->
-<style is:global>
-  /* S'assurer que le conteneur Snipcart est toujours au-dessus de tout */
-  .snipcart-checkout-page,
-  .snipcart-modal,
-  .snipcart-modal__container {
-    z-index: 9999 !important;
-  }
-  
-  /* Ajustement pour la navigation fixe */
-  header.fixed {
-    /* Réduire le z-index pour que Snipcart puisse apparaître par-dessus */
-    z-index: 50;
-  }
-  
-  /* Les éléments Snipcart doivent toujours être visibles */
-  #snipcart {
-    position: relative;
-    z-index: 9999 !important;
-  }
-</style>
+<link rel="preconnect" href="https://app.snipcart.com">
+<link rel="preconnect" href="https://cdn.snipcart.com">
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
@@ -128,39 +107,17 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </Layout>
 
 <!-- Div Snipcart simplifié -->
-<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
+<div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="side"></div>
 
 <script>
-  // Diagnostics améliorés
-  document.addEventListener('snipcart.ready', () => {
-    console.log('Snipcart Ready Event Fired');
+  // Minimal debugging
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded');
     
-    // Écouteur sur tous les boutons d'ajout au panier
+    // Simple click logger
     document.querySelectorAll('.snipcart-add-item').forEach(button => {
-      button.addEventListener('click', () => {
-        console.log('Button clicked', {
-          id: button.getAttribute('data-item-id'),
-          name: button.getAttribute('data-item-name'),
-          price: button.getAttribute('data-item-price'),
-          url: button.getAttribute('data-item-url')
-        });
-      });
+      console.log(`Found button: ${button.getAttribute('data-item-name')}`);
     });
-
-    // Écouteur sur le panier
-    if (window.Snipcart) {
-      window.Snipcart.events.on('item.added', (item) => {
-        console.log('Item added to cart:', item);
-      });
-      
-      window.Snipcart.events.on('cart.ready', (cart) => {
-        console.log('Cart is ready:', cart);
-      });
-
-      window.Snipcart.events.on('error', (error) => {
-        console.error('Snipcart error:', error);
-      });
-    }
   });
 </script>
 

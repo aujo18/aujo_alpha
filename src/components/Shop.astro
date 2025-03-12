@@ -38,15 +38,10 @@ const baseUrl = import.meta.env.PROD
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  <!-- Premier Album -->
+  <!-- Premier Album (très simplifié) -->
   <div class="border rounded-lg overflow-hidden shadow-lg">
     <div class="h-64 bg-gray-200 flex items-center justify-center">
-      <img 
-        src="/images/album-cover.jpg" 
-        alt="Premier Album"
-        class="object-cover h-full w-full"
-        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
-      />
+      <img src="/images/album-cover.jpg" alt="Premier Album" class="object-cover h-full w-full" />
     </div>
     <div class="p-6">
       <h3 class="text-xl font-semibold mb-2">Premier Album</h3>
@@ -54,14 +49,11 @@ const baseUrl = import.meta.env.PROD
       <div class="flex justify-between items-center">
         <span class="text-xl font-bold">15.99 €</span>
         <button
-          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
+          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg"
           data-item-id="album-premier"
           data-item-name="Premier Album"
           data-item-price="15.99"
-          data-item-url={baseUrl}
-          data-item-quantity="1"
-          data-item-image="/images/album-cover.jpg"
-        >
+          data-item-url="/">
           Ajouter au panier
         </button>
       </div>
