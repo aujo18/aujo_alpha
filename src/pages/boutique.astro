@@ -27,6 +27,7 @@ const siteUrl = Astro.url.origin;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999998 !important;
     display: none;
+    pointer-events: none; /* Permettre les clics à travers l'overlay */
   }
 
   /* Afficher l'overlay lorsque le panier est ouvert */
@@ -58,6 +59,14 @@ const siteUrl = Astro.url.origin;
   body.snipcart-checkout-visible,
   body.snipcart-sidecart--opened {
     overflow: hidden;
+  }
+
+  /* S'assurer que les boutons sont cliquables */
+  .snipcart-add-item,
+  .snipcart-checkout {
+    position: relative;
+    z-index: 1;
+    pointer-events: auto;
   }
 </style>
 
