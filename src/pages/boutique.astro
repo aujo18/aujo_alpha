@@ -42,39 +42,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
-<!-- Configuration Snipcart ultra-minimaliste -->
-<script is:inline>
-  window.SnipcartSettings = {
-    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
-    version: "3.0"
-  };
+<!-- Chargement officiel de Snipcart -->
+<script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
+<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 
-  // Chargement minimal de Snipcart
-  (function(){
-    var s = document.createElement('script');
-    s.src = 'https://cdn.snipcart.com/themes/v3.0/default/snipcart.js';
-    s.async = true;
-    document.body.appendChild(s);
-  })();
-</script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
-
-<!-- Styles essentiels pour le checkout -->
-<style is:global>
-  /* S'assurer que le checkout est toujours visible */
-  .snipcart-modal,
-  .snipcart-checkout-page,
-  .snipcart-cart,
-  #snipcart {
-    z-index: 9999999 !important;
-    position: relative;
-  }
-  
-  /* Style du bouton de panier */
-  .cart-button {
-    cursor: pointer;
-  }
-</style>
+<!-- Conteneur Snipcart -->
+<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
@@ -83,8 +56,8 @@ const siteUrl = Astro.url.origin;
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
-        <!-- Bouton de panier avec gestion manuelle -->
-        <button id="cart-button" class="snipcart-checkout cart-button flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+        <!-- Bouton de panier simplifié -->
+        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -124,31 +97,12 @@ const siteUrl = Astro.url.origin;
   </div>
 </Layout>
 
-<!-- Div Snipcart -->
-<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
-
-<!-- Script de gestion du panier -->
+<!-- Script de débogage -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const cartButton = document.getElementById('cart-button');
+    console.log('DOM fully loaded');
     
-    if (cartButton) {
-      // Gestionnaire d'événement manuel
-      cartButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('Cart button clicked');
-        
-        // Vérifier si Snipcart est chargé
-        if (window.Snipcart) {
-          console.log('Snipcart is available, opening cart...');
-          window.Snipcart.api.cart.show();
-        } else {
-          console.error('Snipcart not available');
-        }
-      });
-    }
-    
-    // Vérifier l'état de Snipcart
+    // Vérifier si Snipcart est chargé
     const checkSnipcart = () => {
       if (window.Snipcart) {
         console.log('Snipcart is loaded and ready');
@@ -164,6 +118,15 @@ const siteUrl = Astro.url.origin;
         clearInterval(interval);
       }
     }, 500);
+    
+    // Écouter les événements Snipcart
+    document.addEventListener('snipcart.ready', () => {
+      console.log('Snipcart ready event fired');
+    });
+    
+    document.addEventListener('snipcart.error', (error) => {
+      console.error('Snipcart error:', error);
+    });
   });
 </script>
 
