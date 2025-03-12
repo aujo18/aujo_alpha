@@ -53,6 +53,21 @@ const siteUrl = Astro.url.origin;
   .snipcart-checkout {
     cursor: pointer;
   }
+  
+  /* Style du bouton de panier */
+  .cart-button {
+    background-color: #295135;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+  }
+  
+  .cart-button:hover {
+    background-color: #1e3b27;
+  }
 </style>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
@@ -65,7 +80,7 @@ const siteUrl = Astro.url.origin;
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
         <!-- Bouton de panier avec affichage du prix -->
-        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+        <button class="snipcart-checkout cart-button">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
