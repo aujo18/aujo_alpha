@@ -124,6 +124,15 @@ const siteUrl = Astro.url.origin;
       console.error('Snipcart error:', error);
     });
 
+    // Gérer l'affichage de l'overlay
+    document.addEventListener('snipcart.open', () => {
+      document.querySelector('.snipcart-overlay').classList.add('snipcart-overlay--visible');
+    });
+
+    document.addEventListener('snipcart.close', () => {
+      document.querySelector('.snipcart-overlay').classList.remove('snipcart-overlay--visible');
+    });
+
     const cartButton = document.querySelector('.snipcart-checkout');
     
     if (cartButton) {
