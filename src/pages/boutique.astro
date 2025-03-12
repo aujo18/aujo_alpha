@@ -47,18 +47,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
     loadStrategy: "on-user-interaction",
     modalStyle: "side",
+    version: "3.0",
   };
 
-  (function() {
-    var c, d;
-    (d = (c = window.SnipcartSettings).domain) != null || (c.domain = window.location.origin);
-    var s = document.createElement('script');
-    s.src = 'https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js';
-    s.async = true;
-    document.body.appendChild(s);
-  })();
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var m,g;(g=(m=window.SnipcartSettings).loadCSS)!=null||(m.loadCSS=true);var y,f;(f=(y=window.SnipcartSettings).loadStrategy)!=null||(y.loadStrategy="on-user-interaction");var h,v;(v=(h=window.SnipcartSettings).loadScript)!=null||(h.loadScript=true);var E,_,b;(b=(_=(E=window.SnipcartSettings).timeoutDuration)!=null?_:2500)!=null||(E.timeoutDuration=2500);var t=window.document.getElementsByTagName("head")[0],r=window.document.createElement("script");r.type="text/javascript";r.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";r.async=true;r.addEventListener("load",(function(){window.Snipcart.DEBUG = true;console.log("Snipcart loaded!")}));t.appendChild(r);var a=document.createElement("style");a.innerHTML=".snipcart-modal__container {z-index: 100000;}.snipcart-cart-button, .snipcart-checkout {cursor: pointer;}";t.appendChild(a);var i=window.document.createElement("link");i.rel="stylesheet";i.href="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.css";i.type="text/css";t.appendChild(i)})();
 </script>
-<link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.css" />
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
@@ -70,7 +63,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span class="snipcart-items-count">0</span>
+          <span class="flex items-center">
+            <span class="snipcart-items-count mr-2">0</span>
+            articles - 
+            <span class="snipcart-total-price ml-2">0,00 €</span>
+          </span>
         </button>
       </div>
       <Shop />
@@ -107,21 +104,58 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 </Layout>
 
 <!-- Conteneur Snipcart -->
-<div hidden id="snipcart" data-config-modal-style="side"></div>
+<div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="side"></div>
 
 <script>
-  // Débogage des clics sur les boutons
+  // Débogage amélioré
   document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM fully loaded');
     
+    // Vérifier si Snipcart existe dans la fenêtre
+    setTimeout(() => {
+      if (window.Snipcart) {
+        console.log('Snipcart object found in window');
+      } else {
+        console.error('Snipcart object NOT found in window');
+      }
+    }, 2000);
+    
+    // Ajouter des listeners aux boutons
     document.querySelectorAll('.snipcart-add-item').forEach(button => {
+      console.log('Found button:', button.getAttribute('data-item-name'));
+      
       button.addEventListener('click', (e) => {
-        console.log('Button clicked:', e.currentTarget.getAttribute('data-item-name'));
+        e.preventDefault(); // Empêcher le comportement par défaut
+        console.log('Button clicked:', button.getAttribute('data-item-name'));
+        
+        // Vérifier si Snipcart API est prête
+        if (window.Snipcart) {
+          // Ajouter manuellement au panier
+          window.Snipcart.api.cart.items.add({
+            id: button.getAttribute('data-item-id'),
+            name: button.getAttribute('data-item-name'),
+            price: parseFloat(button.getAttribute('data-item-price')),
+            url: button.getAttribute('data-item-url') || window.location.href,
+            description: button.getAttribute('data-item-description')
+          }).then(() => {
+            console.log('Item added via API');
+          }).catch(error => {
+            console.error('Error adding item via API:', error);
+          });
+        } else {
+          console.error('Snipcart API not available');
+        }
       });
     });
   });
   
+  // Écouter l'événement ready de Snipcart
   document.addEventListener('snipcart.ready', () => {
-    console.log('Snipcart ready!');
+    console.log('Snipcart ready event fired!');
+    
+    // Vérifier si l'API est accessible
+    if (window.Snipcart && window.Snipcart.api) {
+      console.log('Snipcart API is available');
+    }
   });
 </script> 
