@@ -20,18 +20,23 @@ const siteUrl = Astro.url.origin;
   .snipcart-modal,
   .snipcart-checkout-page,
   .snipcart-cart,
-  #snipcart {
-    z-index: 999999 !important;
+  #snipcart,
+  .snipcart-modal__container {
+    z-index: 1000000 !important;
     position: relative;
   }
 
   header.fixed {
-    z-index: 50 !important;
+    z-index: 100 !important;
   }
 
   body.snipcart-checkout-visible,
   body.snipcart-sidecart--opened {
     overflow: hidden;
+  }
+
+  .snipcart-overlay {
+    z-index: 999999 !important;
   }
 </style>
 
