@@ -42,31 +42,37 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
-<!-- Configuration Snipcart ultra-simplifiée -->
+<!-- Configuration Snipcart ultra-minimaliste -->
 <script is:inline>
   window.SnipcartSettings = {
     publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
     version: "3.0"
   };
 
-  // Script de chargement minimal officiel
-  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";h.async=true;f.parentNode.insertBefore(h,f);})();
+  // Chargement minimal de Snipcart
+  (function(){
+    var s = document.createElement('script');
+    s.src = 'https://cdn.snipcart.com/themes/v3.0/default/snipcart.js';
+    s.async = true;
+    document.body.appendChild(s);
+  })();
 </script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
+<!-- Styles essentiels pour le checkout -->
 <style is:global>
-  /* Styles pour s'assurer que le checkout apparaît au-dessus de tout */
-  .snipcart-cart, 
-  .snipcart-modal, 
-  .snipcart-checkout-page, 
-  #snipcart,
-  .snipcart-modal__container {
+  /* S'assurer que le checkout est toujours visible */
+  .snipcart-modal,
+  .snipcart-checkout-page,
+  .snipcart-cart,
+  #snipcart {
     z-index: 9999999 !important;
+    position: relative;
   }
   
-  /* Styles spécifiques pour le bouton de panier */
+  /* Style du bouton de panier */
   .cart-button {
-    cursor: pointer !important;
+    cursor: pointer;
   }
 </style>
 
@@ -77,7 +83,7 @@ const siteUrl = Astro.url.origin;
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
-        <!-- Bouton de panier simplifié -->
+        <!-- Bouton de panier avec gestion manuelle -->
         <button id="cart-button" class="snipcart-checkout cart-button flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
@@ -118,22 +124,23 @@ const siteUrl = Astro.url.origin;
   </div>
 </Layout>
 
-<!-- Div Snipcart simplifiée -->
+<!-- Div Snipcart -->
 <div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
-<!-- Script pour assurer que le bouton de panier fonctionne -->
+<!-- Script de gestion du panier -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Référence au bouton de panier
     const cartButton = document.getElementById('cart-button');
     
     if (cartButton) {
-      // Écouteur d'événement sur le bouton de panier
+      // Gestionnaire d'événement manuel
       cartButton.addEventListener('click', (e) => {
+        e.preventDefault();
         console.log('Cart button clicked');
         
-        // Si Snipcart est chargé, forcer l'ouverture du panier
+        // Vérifier si Snipcart est chargé
         if (window.Snipcart) {
+          console.log('Snipcart is available, opening cart...');
           window.Snipcart.api.cart.show();
         } else {
           console.error('Snipcart not available');
@@ -141,14 +148,22 @@ const siteUrl = Astro.url.origin;
       });
     }
     
-    // Vérifier si Snipcart est chargé
-    setTimeout(() => {
+    // Vérifier l'état de Snipcart
+    const checkSnipcart = () => {
       if (window.Snipcart) {
-        console.log('Snipcart is loaded and available');
-      } else {
-        console.error('Snipcart failed to load');
+        console.log('Snipcart is loaded and ready');
+        return true;
       }
-    }, 2000);
+      console.log('Snipcart not yet loaded');
+      return false;
+    };
+    
+    // Vérifier régulièrement si Snipcart est chargé
+    const interval = setInterval(() => {
+      if (checkSnipcart()) {
+        clearInterval(interval);
+      }
+    }, 500);
   });
 </script>
 
