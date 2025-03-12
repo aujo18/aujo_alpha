@@ -123,6 +123,15 @@ const siteUrl = Astro.url.origin;
     document.addEventListener('snipcart.error', (error) => {
       console.error('Snipcart error:', error);
     });
+
+    const cartButton = document.querySelector('.snipcart-checkout');
+    
+    if (cartButton) {
+      cartButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Cart button clicked');
+      });
+    }
   });
 </script>
 
