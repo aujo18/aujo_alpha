@@ -21,6 +21,8 @@ export function loadSnipcart() {
     snipcartDiv.id = 'snipcart';
     // Remplacez YOUR_PUBLIC_API_KEY par votre clé API publique Snipcart
     snipcartDiv.setAttribute('data-api-key', 'MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0');
+    // Configuration pour afficher en mode pleine page
+    snipcartDiv.setAttribute('data-config-modal-style', 'fullscreen');
     document.body.appendChild(snipcartDiv);
   }
 } 
