@@ -1,5 +1,6 @@
 ---
-// Simulez des données de produits - vous pourriez les remplacer par des données réelles plus tard
+// Accepter siteUrl en tant que propriété
+const { siteUrl } = Astro.props;
 const products = [
   {
     id: "album-premier",
@@ -53,7 +54,7 @@ const baseUrl = import.meta.env.PROD
           data-item-id="album-premier"
           data-item-name="Premier Album"
           data-item-price="15.99"
-          data-item-url="/">
+          data-item-url={siteUrl || window.location.origin}>
           Ajouter au panier
         </button>
       </div>
@@ -80,7 +81,7 @@ const baseUrl = import.meta.env.PROD
           data-item-id="t-shirt-tour"
           data-item-name="T-shirt Tournée"
           data-item-price="24.99"
-          data-item-url={baseUrl}
+          data-item-url={siteUrl || window.location.origin}
           data-item-quantity="1"
           data-item-image="/images/tshirt.jpg"
         >
@@ -110,7 +111,7 @@ const baseUrl = import.meta.env.PROD
           data-item-id="tote-bag"
           data-item-name="Tote Bag"
           data-item-price="12.99"
-          data-item-url={baseUrl}
+          data-item-url={siteUrl || window.location.origin}
           data-item-quantity="1"
           data-item-image="/images/totebag.jpg"
         >
@@ -140,7 +141,7 @@ const baseUrl = import.meta.env.PROD
           data-item-id="poster-signature"
           data-item-name="Poster dédicacé"
           data-item-price="19.99"
-          data-item-url={baseUrl}
+          data-item-url={siteUrl || window.location.origin}
           data-item-quantity="1"
           data-item-image="/images/poster.jpg"
         >

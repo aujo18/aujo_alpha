@@ -39,48 +39,27 @@ const products = [
 const title = "Aujo | Boutique";
 const description = "Boutique officielle d'Aujo. Achetez des albums, des merchandising et d'autres produits exclusifs.";
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteUrl = Astro.url.origin;
 ---
 
-<!-- Ajouter cette balise script en haut, avant Layout -->
-<script>
+<!-- Configuration Snipcart simplifiée -->
+<script is:inline>
   window.SnipcartSettings = {
-    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"
+    publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
+    version: "3.0"
   };
 
-  // Chargement standard de Snipcart
-  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";h.async=true;f.parentNode.insertBefore(h,f);window.document.createElement("div").innerHTML="<style>.snipcart-modal__container{z-index:10000000}.snipcart-cart-button{z-index:99999}.snipcart *{font-family:sans-serif}</style>";})();
+  (function(){var s=document.createElement("script");s.src="https://cdn.snipcart.com/themes/v3.0/default/snipcart.js";s.async=true;document.body.appendChild(s);document.body.appendChild(document.createElement("div")).innerHTML="<style>.snipcart-modal__container{z-index:10000000!important}.snipcart-cart-button,.snipcart-checkout{cursor:pointer}</style>";})();
 </script>
-<link rel="preconnect" href="https://app.snipcart.com">
-<link rel="preconnect" href="https://cdn.snipcart.com">
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
-<!-- Après le script Snipcart mais avant le Layout -->
+<!-- Styles z-index simplifiés -->
 <style is:global>
-  /* Augmenter le z-index des éléments Snipcart pour qu'ils soient au-dessus de tout */
-  .snipcart-modal,
-  .snipcart-checkout-page,
-  .snipcart-cart,
-  .snipcart-modal__container,
-  #snipcart-checkout-step-billing,
-  #snipcart {
+  .snipcart-modal, .snipcart-checkout-page, .snipcart-cart, #snipcart {
     z-index: 9999999 !important;
   }
-  
-  /* Réduire légèrement le z-index de la navigation pour permettre à Snipcart d'apparaître par-dessus */
   header.fixed {
     z-index: 40 !important;
-  }
-  
-  /* Style de base pour le conteneur modal de Snipcart */
-  .snipcart-modal__container {
-    position: relative;
-    z-index: 9999999 !important;
-  }
-  
-  /* S'assurer que le corps du document ne bloque pas le modal */
-  body.snipcart-checkout-visible,
-  body.snipcart-sidecart--opened {
-    overflow: hidden;
   }
 </style>
 
@@ -90,7 +69,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <div class="container mx-auto px-4 py-12">
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
-        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition">
+        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
@@ -103,7 +82,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           </span>
         </button>
       </div>
-      <Shop />
+      <Shop siteUrl={siteUrl} />
     </div>
   </main>
   <Contact />
@@ -136,8 +115,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </div>
 </Layout>
 
-<!-- Div Snipcart simplifié -->
-<div id="snipcart" hidden data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0" data-config-modal-style="side"></div>
+<!-- Div Snipcart -->
+<div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
 <script>
   // Minimal debugging
@@ -151,14 +130,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   });
 </script>
 
-<div class="mt-8 p-4 bg-gray-100 rounded-lg">
+<div class="container mx-auto mt-8 p-4 bg-gray-100 rounded-lg">
   <h2 class="text-2xl mb-4">Test Bouton</h2>
   <button
     class="snipcart-add-item bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg"
     data-item-id="test-item"
     data-item-name="Article Test"
     data-item-price="9.99"
-    data-item-url="https://votredomaine.com/boutique" 
+    data-item-url={siteUrl} 
     data-item-description="Ceci est un article de test"
   >
     TESTER SNIPCART
