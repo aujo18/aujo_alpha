@@ -53,13 +53,29 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   
   <!-- Div Snipcart pour le crawling -->
   <div hidden id="snipcart-product-templates">
-    {products.map((product) => (
-      <div id={`snipcart-template-${product.id}`} data-item-id={product.id}>
-        <h2>{product.name}</h2>
-        <p>{product.description}</p>
-        <p>{product.price} €</p>
-      </div>
-    ))}
+    <div id="snipcart-template-album-premier" data-item-id="album-premier">
+      <h2>Premier Album</h2>
+      <p>Album physique avec livret de paroles</p>
+      <p>15.99 €</p>
+    </div>
+    
+    <div id="snipcart-template-t-shirt-tour" data-item-id="t-shirt-tour">
+      <h2>T-shirt Tournée</h2>
+      <p>T-shirt officiel de la tournée 2023</p>
+      <p>24.99 €</p>
+    </div>
+    
+    <div id="snipcart-template-tote-bag" data-item-id="tote-bag">
+      <h2>Tote Bag</h2>
+      <p>Sac en toile avec design exclusif</p>
+      <p>12.99 €</p>
+    </div>
+    
+    <div id="snipcart-template-poster-signature" data-item-id="poster-signature">
+      <h2>Poster dédicacé</h2>
+      <p>Poster A3 avec signature authentique</p>
+      <p>19.99 €</p>
+    </div>
   </div>
 </Layout>
 

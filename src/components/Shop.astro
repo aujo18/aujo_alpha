@@ -30,37 +30,128 @@ const products = [
     image: "/images/poster.jpg"
   }
 ];
+
+const siteUrl = Astro.site ? new URL('/boutique', Astro.site).href : '/boutique';
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {products.map(product => (
-    <div class="border rounded-lg overflow-hidden shadow-lg">
-      <div class="h-64 bg-gray-200 flex items-center justify-center">
-        <img 
-          src={product.image} 
-          alt={product.name}
-          class="object-cover h-full w-full"
-          onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
-        />
-      </div>
-      <div class="p-6">
-        <h3 class="text-xl font-semibold mb-2">{product.name}</h3>
-        <p class="text-gray-700 mb-4">{product.description}</p>
-        <div class="flex justify-between items-center">
-          <span class="text-xl font-bold">{product.price.toFixed(2)} €</span>
-          <button
-            class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
-            data-item-id={product.id}
-            data-item-name={product.name}
-            data-item-price={product.price}
-            data-item-url={Astro.site ? new URL('/boutique', Astro.site).href : '/boutique'}
-            data-item-description={product.description}
-            data-item-image={product.image}
-          >
-            Ajouter au panier
-          </button>
-        </div>
+  <!-- Premier Album -->
+  <div class="border rounded-lg overflow-hidden shadow-lg">
+    <div class="h-64 bg-gray-200 flex items-center justify-center">
+      <img 
+        src="/images/album-cover.jpg" 
+        alt="Premier Album"
+        class="object-cover h-full w-full"
+        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
+      />
+    </div>
+    <div class="p-6">
+      <h3 class="text-xl font-semibold mb-2">Premier Album</h3>
+      <p class="text-gray-700 mb-4">Album physique avec livret de paroles</p>
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-bold">15.99 €</span>
+        <button
+          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
+          data-item-id="album-premier"
+          data-item-name="Premier Album"
+          data-item-price="15.99"
+          data-item-url={siteUrl}
+          data-item-description="Album physique avec livret de paroles"
+          data-item-image="/images/album-cover.jpg"
+        >
+          Ajouter au panier
+        </button>
       </div>
     </div>
-  ))}
+  </div>
+
+  <!-- T-shirt Tournée -->
+  <div class="border rounded-lg overflow-hidden shadow-lg">
+    <div class="h-64 bg-gray-200 flex items-center justify-center">
+      <img 
+        src="/images/tshirt.jpg" 
+        alt="T-shirt Tournée"
+        class="object-cover h-full w-full"
+        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
+      />
+    </div>
+    <div class="p-6">
+      <h3 class="text-xl font-semibold mb-2">T-shirt Tournée</h3>
+      <p class="text-gray-700 mb-4">T-shirt officiel de la tournée 2023</p>
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-bold">24.99 €</span>
+        <button
+          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
+          data-item-id="t-shirt-tour"
+          data-item-name="T-shirt Tournée"
+          data-item-price="24.99"
+          data-item-url={siteUrl}
+          data-item-description="T-shirt officiel de la tournée 2023"
+          data-item-image="/images/tshirt.jpg"
+        >
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tote Bag -->
+  <div class="border rounded-lg overflow-hidden shadow-lg">
+    <div class="h-64 bg-gray-200 flex items-center justify-center">
+      <img 
+        src="/images/totebag.jpg" 
+        alt="Tote Bag"
+        class="object-cover h-full w-full"
+        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
+      />
+    </div>
+    <div class="p-6">
+      <h3 class="text-xl font-semibold mb-2">Tote Bag</h3>
+      <p class="text-gray-700 mb-4">Sac en toile avec design exclusif</p>
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-bold">12.99 €</span>
+        <button
+          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
+          data-item-id="tote-bag"
+          data-item-name="Tote Bag"
+          data-item-price="12.99"
+          data-item-url={siteUrl}
+          data-item-description="Sac en toile avec design exclusif"
+          data-item-image="/images/totebag.jpg"
+        >
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Poster dédicacé -->
+  <div class="border rounded-lg overflow-hidden shadow-lg">
+    <div class="h-64 bg-gray-200 flex items-center justify-center">
+      <img 
+        src="/images/poster.jpg" 
+        alt="Poster dédicacé"
+        class="object-cover h-full w-full"
+        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
+      />
+    </div>
+    <div class="p-6">
+      <h3 class="text-xl font-semibold mb-2">Poster dédicacé</h3>
+      <p class="text-gray-700 mb-4">Poster A3 avec signature authentique</p>
+      <div class="flex justify-between items-center">
+        <span class="text-xl font-bold">19.99 €</span>
+        <button
+          class="snipcart-add-item bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition"
+          data-item-id="poster-signature"
+          data-item-name="Poster dédicacé"
+          data-item-price="19.99"
+          data-item-url={siteUrl}
+          data-item-description="Poster A3 avec signature authentique"
+          data-item-image="/images/poster.jpg"
+        >
+          Ajouter au panier
+        </button>
+      </div>
+    </div>
+  </div>
 </div> 
