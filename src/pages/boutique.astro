@@ -132,6 +132,15 @@ const siteUrl = Astro.url.origin;
         console.log('Cart button clicked');
       });
     }
+
+    // Ajoutez un gestionnaire d'événements pour les boutons d'ajout au panier
+    const addItemButtons = document.querySelectorAll('.snipcart-add-item');
+    addItemButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('Add item button clicked:', button.getAttribute('data-item-name'));
+      });
+    });
   });
 </script>
 
