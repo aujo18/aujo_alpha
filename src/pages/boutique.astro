@@ -42,24 +42,31 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
-<!-- Configuration Snipcart simplifiée -->
+<!-- Configuration Snipcart ultra-simplifiée -->
 <script is:inline>
   window.SnipcartSettings = {
     publicApiKey: "MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0",
     version: "3.0"
   };
 
-  (function(){var s=document.createElement("script");s.src="https://cdn.snipcart.com/themes/v3.0/default/snipcart.js";s.async=true;document.body.appendChild(s);document.body.appendChild(document.createElement("div")).innerHTML="<style>.snipcart-modal__container{z-index:10000000!important}.snipcart-cart-button,.snipcart-checkout{cursor:pointer}</style>";})();
+  // Script de chargement minimal officiel
+  (function(){var c,d;(d=(c=window.SnipcartSettings).version)!=null||(c.version="3.0");var s,S;(S=(s=window.SnipcartSettings).currency)!=null||(s.currency="eur");var l,p;(p=(l=window.SnipcartSettings).domain)!=null||(l.domain="cdn.snipcart.com");var w,u;(u=(w=window.SnipcartSettings).protocol)!=null||(w.protocol="https");var f=window.document.getElementsByTagName("script")[0],h=window.document.createElement("script");h.src="https://cdn.snipcart.com/themes/v"+window.SnipcartSettings.version+"/default/snipcart.js";h.async=true;f.parentNode.insertBefore(h,f);})();
 </script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.0/default/snipcart.css" />
 
-<!-- Styles z-index simplifiés -->
 <style is:global>
-  .snipcart-modal, .snipcart-checkout-page, .snipcart-cart, #snipcart {
+  /* Styles pour s'assurer que le checkout apparaît au-dessus de tout */
+  .snipcart-cart, 
+  .snipcart-modal, 
+  .snipcart-checkout-page, 
+  #snipcart,
+  .snipcart-modal__container {
     z-index: 9999999 !important;
   }
-  header.fixed {
-    z-index: 40 !important;
+  
+  /* Styles spécifiques pour le bouton de panier */
+  .cart-button {
+    cursor: pointer !important;
   }
 </style>
 
@@ -69,17 +76,13 @@ const siteUrl = Astro.url.origin;
     <div class="container mx-auto px-4 py-12">
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
-        <button class="snipcart-checkout flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+        
+        <!-- Bouton de panier simplifié -->
+        <button id="cart-button" class="snipcart-checkout cart-button flex items-center bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span class="flex items-center">
-            <span class="snipcart-items-count mr-2">0</span>
-            article(s) -
-            <span class="ml-2">
-              <span class="snipcart-total-price">0,00 €</span>
-            </span>
-          </span>
+          <span class="snipcart-items-count mr-2">0</span> articles
         </button>
       </div>
       <Shop siteUrl={siteUrl} />
@@ -115,18 +118,37 @@ const siteUrl = Astro.url.origin;
   </div>
 </Layout>
 
-<!-- Div Snipcart -->
+<!-- Div Snipcart simplifiée -->
 <div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
+<!-- Script pour assurer que le bouton de panier fonctionne -->
 <script>
-  // Minimal debugging
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded');
+    // Référence au bouton de panier
+    const cartButton = document.getElementById('cart-button');
     
-    // Simple click logger
-    document.querySelectorAll('.snipcart-add-item').forEach(button => {
-      console.log(`Found button: ${button.getAttribute('data-item-name')}`);
-    });
+    if (cartButton) {
+      // Écouteur d'événement sur le bouton de panier
+      cartButton.addEventListener('click', (e) => {
+        console.log('Cart button clicked');
+        
+        // Si Snipcart est chargé, forcer l'ouverture du panier
+        if (window.Snipcart) {
+          window.Snipcart.api.cart.show();
+        } else {
+          console.error('Snipcart not available');
+        }
+      });
+    }
+    
+    // Vérifier si Snipcart est chargé
+    setTimeout(() => {
+      if (window.Snipcart) {
+        console.log('Snipcart is loaded and available');
+      } else {
+        console.error('Snipcart failed to load');
+      }
+    }, 2000);
   });
 </script>
 
