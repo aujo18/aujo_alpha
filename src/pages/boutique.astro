@@ -26,13 +26,12 @@ const siteUrl = Astro.url.origin;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999998 !important;
-    display: none;
-    pointer-events: none; /* Permettre les clics à travers l'overlay */
+    display: none; /* Assurez-vous que l'overlay est caché par défaut */
   }
 
   /* Afficher l'overlay lorsque le panier est ouvert */
   .snipcart-overlay--visible {
-    display: block;
+    display: block; /* L'overlay doit être visible uniquement lorsque le panier est ouvert */
   }
 
   /* Positionnement et z-index des éléments Snipcart */
