@@ -15,6 +15,26 @@ const siteUrl = Astro.url.origin;
 <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 
+<!-- Styles pour gérer l'ordre d'empilement -->
+<style is:global>
+  .snipcart-modal,
+  .snipcart-checkout-page,
+  .snipcart-cart,
+  #snipcart {
+    z-index: 999999 !important;
+    position: relative;
+  }
+
+  header.fixed {
+    z-index: 50 !important;
+  }
+
+  body.snipcart-checkout-visible,
+  body.snipcart-sidecart--opened {
+    overflow: hidden;
+  }
+</style>
+
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <Navigation />
   <main>
