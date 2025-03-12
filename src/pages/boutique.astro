@@ -15,28 +15,49 @@ const siteUrl = Astro.url.origin;
 <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 
-<!-- Styles pour gérer l'ordre d'empilement -->
+<!-- Styles pour gérer l'overlay et le positionnement -->
 <style is:global>
+  /* Overlay complet */
+  .snipcart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999998 !important;
+    display: none;
+  }
+
+  /* Afficher l'overlay lorsque le panier est ouvert */
+  .snipcart-overlay--visible {
+    display: block;
+  }
+
+  /* Positionnement et z-index des éléments Snipcart */
   .snipcart-modal,
   .snipcart-checkout-page,
   .snipcart-cart,
   #snipcart,
   .snipcart-modal__container {
-    z-index: 1000000 !important;
+    z-index: 999999 !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Diminuer le z-index du menu de navigation */
+  header.fixed {
+    z-index: 100 !important;
     position: relative;
   }
 
-  header.fixed {
-    z-index: 100 !important;
-  }
-
+  /* Gestion du défilement */
   body.snipcart-checkout-visible,
   body.snipcart-sidecart--opened {
     overflow: hidden;
-  }
-
-  .snipcart-overlay {
-    z-index: 999999 !important;
   }
 </style>
 
