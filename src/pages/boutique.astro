@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation.astro';
+// Nous ne chargeons plus le composant Navigation
 import Contact from '../components/Contact.astro';
 import Shop from '../components/Shop.astro';
 
@@ -15,22 +15,31 @@ const siteUrl = Astro.url.origin;
 <script src="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.js" defer></script>
 <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.3.1/default/snipcart.css" />
 
-<!-- Style ultra-agressif pour s'assurer que le checkout est visible -->
+<!-- Style simplifié pour Snipcart et le bouton retour -->
 <style is:global>
-  /* Z-index extrêmement élevé pour Snipcart */
+  /* Z-index pour Snipcart */
   #snipcart,
   .snipcart-modal,
   .snipcart-cart,
-  .snipcart-checkout-page,
-  .snipcart-modal__container {
-    z-index: 9999999999 !important; /* Valeur extrêmement élevée */
-    position: relative !important;
+  .snipcart-checkout-page {
+    z-index: 9999 !important;
   }
   
-  /* Forcer le menu à rester en dessous du checkout */
-  body.snipcart-checkout-visible nav,
-  body.snipcart-checkout-visible header {
-    visibility: hidden !important;
+  /* Styles pour le bouton retour */
+  .back-button {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    padding: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 40;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .back-button:hover {
+    transform: scale(1.1);
   }
   
   /* Styles de base */
@@ -41,9 +50,15 @@ const siteUrl = Astro.url.origin;
 </style>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
-  <Navigation />
+  <!-- Bouton retour à la place de la navigation -->
+  <a href="/" class="back-button">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+  </a>
+  
   <main>
-    <div class="container mx-auto px-4 py-12">
+    <div class="container mx-auto px-4 py-12 mt-8">
       <div class="flex justify-between items-center mb-12">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
@@ -64,37 +79,10 @@ const siteUrl = Astro.url.origin;
 <!-- Conteneur Snipcart -->
 <div hidden id="snipcart" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
-<!-- Script pour manipuler directement le DOM -->
+<!-- Script minimal pour Snipcart -->
 <script>
-  // Observer pour détecter quand le body reçoit la classe snipcart-checkout-visible
-  const bodyObserver = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.attributeName === 'class') {
-        const body = document.body;
-        
-        // Vérifier si la classe a été ajoutée
-        if (body.classList.contains('snipcart-checkout-visible')) {
-          console.log('Checkout visible - hiding navigation');
-          
-          // Forcer tous les éléments de navigation à se cacher
-          document.querySelectorAll('header, nav').forEach(el => {
-            el.style.visibility = 'hidden';
-          });
-        } else {
-          console.log('Checkout hidden - showing navigation');
-          
-          // Réafficher les éléments de navigation
-          document.querySelectorAll('header, nav').forEach(el => {
-            el.style.visibility = 'visible';
-          });
-        }
-      }
-    });
-  });
-
   document.addEventListener('DOMContentLoaded', () => {
-    // Observer les changements sur le body
-    bodyObserver.observe(document.body, { attributes: true });
+    console.log('Boutique page loaded without navigation menu');
     
     // Surveiller les clics sur les boutons
     document.querySelectorAll('.snipcart-add-item, .snipcart-checkout').forEach(button => {
