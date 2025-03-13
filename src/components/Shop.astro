@@ -32,19 +32,24 @@ const baseUrl = import.meta.env.PROD
     display: grid;
     grid-template-columns: 1fr; /* Une seule colonne par défaut (mobile) */
     gap: 2.5rem;
+    justify-content: center;
   }
   
   /* Tablette : 2 colonnes */
   @media (min-width: 640px) {
     .product-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 300px));
+      justify-content: center;
     }
   }
   
-  /* Desktop : exactement 3 colonnes */
+  /* Desktop : exactement 3 colonnes maximum */
   @media (min-width: 1024px) {
     .product-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 300px));
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
     }
   }
   
