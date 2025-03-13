@@ -11,10 +11,11 @@ const products = [
   },
   {
     id: "aujo-cewneck",
-    name: "Aujo Cewneck",
+    name: "Aujo Crewneck",
     price: 80.00,
     description: "",
-    size: "S, M, L, XL",
+    size: true, // Indicateur que ce produit a besoin d'un sélecteur de taille
+    sizeOptions: "S|M|L|XL", // Options de taille séparées par des pipes
     image: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/xowv99beywgte8ktoums"
   }
 ];
@@ -127,7 +128,13 @@ const baseUrl = import.meta.env.PROD
             data-item-price={product.price}
             data-item-url={siteUrl}
             data-item-image={product.image}
-            data-item-custom1-options={product.size}
+            
+            {/* Ajouter des attributs conditionnels pour la taille si le produit a des tailles */}
+            {...product.size && {
+              'data-item-custom1-name': 'Taille',
+              'data-item-custom1-options': product.sizeOptions,
+              'data-item-custom1-required': 'true'
+            }}
           >
             Ajouter au panier
           </button>
