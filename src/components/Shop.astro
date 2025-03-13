@@ -14,6 +14,7 @@ const products = [
     name: "Aujo Cewneck",
     price: 80.00,
     description: "",
+    size: "S, M, L, XL",
     image: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/xowv99beywgte8ktoums"
   }
 ];
@@ -126,6 +127,7 @@ const baseUrl = import.meta.env.PROD
             data-item-price={product.price}
             data-item-url={siteUrl}
             data-item-image={product.image}
+            data-item-custom1-options={product.size}
           >
             Ajouter au panier
           </button>
