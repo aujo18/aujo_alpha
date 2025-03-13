@@ -64,11 +64,41 @@ const baseUrl = import.meta.env.PROD
     transform: translateY(-5px);
   }
   
+  .product-image-container {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
   .product-image {
     aspect-ratio: 1 / 1;
     width: 100%;
     object-fit: cover;
     margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-image-container:hover .product-image {
+    transform: scale(1.05);
+  }
+  
+  .product-image-zoom {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .product-image-container:hover .product-image-zoom {
+    opacity: 1;
   }
   
   .product-name {
@@ -110,17 +140,60 @@ const baseUrl = import.meta.env.PROD
     flex-direction: column;
     margin-top: auto;
   }
+  
+  /* Styles pour le modal d'image */
+  .image-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  
+  .image-modal.open {
+    display: flex;
+  }
+  
+  .modal-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 </style>
 
 <div class="product-grid">
   {products.map((product) => (
     <div class="product-card">
-      <img 
-        src={product.image} 
-        alt={product.name} 
-        class="product-image"
-        onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
-      />
+      <div class="product-image-container" data-image={product.image} data-product-name={product.name}>
+        <img 
+          src={product.image} 
+          alt={product.name} 
+          class="product-image"
+          onerror="this.src='/images/placeholder.jpg'; this.onerror=null;"
+        />
+        <div class="product-image-zoom">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+          </svg>
+        </div>
+      </div>
       <div class="product-content">
         <h3 class="product-name">{product.name}</h3>
         <p class="product-description">{product.description}</p>
@@ -134,7 +207,6 @@ const baseUrl = import.meta.env.PROD
             data-item-url={siteUrl}
             data-item-image={product.image}
             
-            {/* Ajouter des attributs conditionnels pour la taille si le produit a des tailles */}
             {...product.size && {
               'data-item-custom1-name': 'Taille',
               'data-item-custom1-options': product.sizeOptions,
@@ -147,4 +219,55 @@ const baseUrl = import.meta.env.PROD
       </div>
     </div>
   ))}
-</div> 
+</div>
+
+<!-- Modal pour l'agrandissement des images -->
+<div class="image-modal" id="imageModal">
+  <span class="modal-close">&times;</span>
+  <img src="" class="modal-content" id="modalImage" />
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeButton = document.querySelector('.modal-close');
+    
+    // Ouvrir le modal quand on clique sur une image
+    document.querySelectorAll('.product-image-container').forEach(container => {
+      container.addEventListener('click', function() {
+        const imgSrc = this.getAttribute('data-image');
+        const productName = this.getAttribute('data-product-name');
+        
+        modalImg.src = imgSrc;
+        modalImg.alt = productName;
+        modal.classList.add('open');
+        
+        // Empêcher le défilement du body quand le modal est ouvert
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Fermer le modal quand on clique sur le bouton de fermeture
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    
+    // Fermer le modal quand on clique n'importe où dans le modal
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+    
+    // Fermer le modal avec la touche Echap
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script> 
