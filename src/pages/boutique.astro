@@ -75,7 +75,7 @@ const siteUrl = Astro.url.origin;
     background-color: #1e3b27;
   }
   
-  /* Style pour la pastille (badge) */
+  /* Style pour la pastille (badge) - Initialement caché */
   .cart-badge {
     position: absolute;
     top: -8px;
@@ -86,7 +86,7 @@ const siteUrl = Astro.url.origin;
     width: 22px;
     height: 22px;
     font-size: 12px;
-    display: flex;
+    display: none; /* Caché par défaut */
     align-items: center;
     justify-content: center;
   }
@@ -97,6 +97,11 @@ const siteUrl = Astro.url.origin;
     font-weight: 500;
   }
 </style>
+
+<!-- Ajouter cet élément invisible pour le format de devise -->
+<div hidden class="snipcart-formatter">
+  <span class="snipcart-total-price snipcart-amount"></span>
+</div>
 
 <Layout title={title} description={description} canonicalURL={canonicalURL.href}>
   <!-- Navigation réintégrée avec l'option non-fixe -->
@@ -134,37 +139,71 @@ const siteUrl = Astro.url.origin;
   document.addEventListener('DOMContentLoaded', () => {
     console.log('Boutique page loaded with navigation menu');
     
-    // Forcer le checkout Snipcart à passer au-dessus de la navigation
-    document.addEventListener('snipcart.ready', () => {
-      console.log('Snipcart is ready - ensuring modal appears above navigation');
+    // Initialiser la pastille comme cachée
+    const badge = document.querySelector('.cart-badge');
+    if (badge) {
+      badge.style.display = 'none';
+    }
+    
+    // Fonction pour mettre à jour l'affichage de la pastille
+    const updateBadge = () => {
+      console.log('Updating badge visibility');
+      const badge = document.querySelector('.cart-badge');
       
-      // Vérifier si la pastille doit être affichée
-      const updateBadge = () => {
-        const badge = document.querySelector('.cart-badge');
-        const itemCount = parseInt(document.querySelector('.snipcart-items-count').textContent);
-        
-        if (badge) {
-          if (itemCount > 0) {
-            badge.style.display = 'flex';
-          } else {
-            badge.style.display = 'none';
-          }
+      // Récupérer le nombre d'articles (avec une valeur par défaut de 0)
+      let itemCount = 0;
+      try {
+        const countText = document.querySelector('.snipcart-items-count').textContent;
+        itemCount = parseInt(countText) || 0;
+        console.log('Current item count:', itemCount);
+      } catch (e) {
+        console.error('Error parsing item count:', e);
+      }
+      
+      // Afficher ou masquer la pastille
+      if (badge) {
+        if (itemCount > 0) {
+          badge.style.display = 'flex';
+          console.log('Badge should be visible now');
+        } else {
+          badge.style.display = 'none';
+          console.log('Badge should be hidden now');
         }
-      };
+      }
       
-      // Mettre à jour au chargement
-      updateBadge();
-      
-      // Mettre à jour lorsque le panier change
-      document.addEventListener('snipcart.cart.ready', updateBadge);
-      document.addEventListener('snipcart.cart.itemadded', updateBadge);
-      document.addEventListener('snipcart.cart.itemremoved', updateBadge);
+      // Formatter le prix pour enlever le "CA"
+      const priceElement = document.querySelector('.cart-total');
+      if (priceElement) {
+        const priceText = priceElement.textContent;
+        if (priceText.includes('CA')) {
+          // Nettoyer le prix pour enlever "CA"
+          const cleanPrice = priceText.replace('CA', '').replace('$', '').trim();
+          // Reformater avec juste le montant et le symbole $
+          priceElement.textContent = `${cleanPrice} $`;
+        }
+      }
+    };
+    
+    // S'exécuter lorsque Snipcart est prêt
+    document.addEventListener('snipcart.ready', () => {
+      console.log('Snipcart is ready');
+      setTimeout(updateBadge, 500); // Délai pour permettre aux données Snipcart de se charger
     });
+    
+    // Mettre à jour chaque fois que le panier est modifié
+    document.addEventListener('snipcart.cart.ready', updateBadge);
+    document.addEventListener('snipcart.cart.itemadded', updateBadge);
+    document.addEventListener('snipcart.cart.itemremoved', updateBadge);
+    
+    // Vérifier périodiquement (au cas où les événements ne se déclenchent pas)
+    setInterval(updateBadge, 2000);
     
     // Surveiller les clics sur les boutons
     document.querySelectorAll('.snipcart-add-item, .snipcart-checkout').forEach(button => {
       button.addEventListener('click', function(e) {
         console.log('Button clicked:', this.className);
+        // Mettre à jour la pastille après un court délai
+        setTimeout(updateBadge, 500);
       });
     });
   });
