@@ -18,7 +18,12 @@ const siteUrl = Astro.url.origin;
     loadStrategy: "on-user-interaction",
     modalStyle: "side",
     version: "3.0",
-    currency: "cad"
+    currency: "cad",
+    localization: {
+      currency: {
+        format: "{0} $"
+      }
+    }
   };
   
   // Script de chargement officiel
@@ -124,7 +129,7 @@ const siteUrl = Astro.url.origin;
 <!-- Conteneur Snipcart avec attributs corrects -->
 <div hidden id="snipcart" data-config-modal-style="side" data-api-key="MTYzYzM2ODMtZWFlYy00MGJiLThkMDAtM2QzN2YwMGVkYzFiNjM2OTQ0MzAxMDE5OTU2NjQ0"></div>
 
-<!-- Script minimal pour Snipcart -->
+<!-- Script pour gérer la pastille du panier -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     console.log('Boutique page loaded with navigation menu');
@@ -132,6 +137,28 @@ const siteUrl = Astro.url.origin;
     // Forcer le checkout Snipcart à passer au-dessus de la navigation
     document.addEventListener('snipcart.ready', () => {
       console.log('Snipcart is ready - ensuring modal appears above navigation');
+      
+      // Vérifier si la pastille doit être affichée
+      const updateBadge = () => {
+        const badge = document.querySelector('.cart-badge');
+        const itemCount = parseInt(document.querySelector('.snipcart-items-count').textContent);
+        
+        if (badge) {
+          if (itemCount > 0) {
+            badge.style.display = 'flex';
+          } else {
+            badge.style.display = 'none';
+          }
+        }
+      };
+      
+      // Mettre à jour au chargement
+      updateBadge();
+      
+      // Mettre à jour lorsque le panier change
+      document.addEventListener('snipcart.cart.ready', updateBadge);
+      document.addEventListener('snipcart.cart.itemadded', updateBadge);
+      document.addEventListener('snipcart.cart.itemremoved', updateBadge);
     });
     
     // Surveiller les clics sur les boutons
