@@ -11,6 +11,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteUrl = Astro.url.origin;
 ---
 
+<!-- Assurer l'encodage UTF-8 -->
+<meta charset="UTF-8" />
+
 <!-- Configuration Snipcart améliorée -->
 <script is:inline>
   window.SnipcartSettings = {
