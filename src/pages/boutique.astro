@@ -54,19 +54,42 @@ const siteUrl = Astro.url.origin;
     cursor: pointer;
   }
   
-  /* Style du bouton de panier */
+  /* Style du bouton de panier simplifié */
   .cart-button {
     background-color: #295135;
     color: white;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem;
     border-radius: 0.375rem;
     display: flex;
     align-items: center;
     transition: background-color 0.2s ease;
+    position: relative;
   }
   
   .cart-button:hover {
     background-color: #1e3b27;
+  }
+  
+  /* Style pour la pastille (badge) */
+  .cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #e53e3e;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Style pour le montant total */
+  .cart-total {
+    margin-left: 8px;
+    font-weight: 500;
   }
 </style>
 
@@ -79,15 +102,17 @@ const siteUrl = Astro.url.origin;
       <div class="flex justify-between items-center mb-24">
         <h1 class="text-4xl md:text-5xl font-bold">Boutique</h1>
         
-        <!-- Bouton de panier avec affichage du prix -->
+        <!-- Bouton de panier simplifié avec sac, pastille et montant -->
         <button class="snipcart-checkout cart-button">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
-          <span class="flex items-center">
-            <span class="snipcart-items-count mr-1">0</span> 
-            article(s)
-          </span>
+          
+          <!-- Pastille avec le nombre d'articles -->
+          <span class="cart-badge snipcart-items-count">0</span>
+          
+          <!-- Montant total -->
+          <span class="cart-total snipcart-total-price">0.00 $</span>
         </button>
       </div>
       <Shop siteUrl={siteUrl} />
