@@ -13,6 +13,54 @@ export interface Album {
 
 export const albums: Album[] = [
   {
+    id: "les-femmes",
+    title: "Les Femmes",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/mhes4eadejyc6xlc08wa",
+    spotifyUrl: "https://bfan.link/les-femmes-1",
+    songs: [
+      {
+        title: "Les Femmes",
+        lyrics: `On m’a demandé un beat catchy pour la radio
+Que mon kick, mon snare te rendent esclave de mon tempo
+Loin de là, l’intention de te retenir
+Mais ton histoire m’attire
+Reste un peu, je commence à peine à te lire
+Sous les spotlights, deux soulmates se rencontrent
+Les signes sont trop clairs même dans la pénombre
+Please, attrape-moi avant que je tombe
+Pour toi, pour toi
+
+J’ai entendu que toutes les femmes savent danser (danser)
+Y’en a pas deux comme toi
+J’ai pris trop de temps à trouver (trouver)
+Même si c’était vrai que toutes les femmes savent danser (danser)
+Y’a juste toi qui blow my mind
+You take me up, up and away
+
+I wanna say it out loud
+You’re all I think about
+Viens-tu souvent ici?
+Sorry pour ma mauvaise pick-up line
+J’vais pas te mentir, je ne fais que suivre le flow
+J’te veux collée à moi comme les tattoos sur ma peau
+Ma sleeve raconte mon histoire
+J’t’avoue que j’ai un peu peur de te décevoir
+On dit que pour l’âme, les yeux sont le miroir
+Mes yeux verts sont rivés sur toi
+
+J’ai entendu que toutes les femmes savent danser (danser)
+Y’en a pas deux comme toi
+J’ai pris trop de temps à trouver (trouver)
+Même si c’était vrai que toutes les femmes savent danser (danser)
+Y’a juste toi qui blow my mind
+You take me up, up and away
+
+Breath away, you take my breath away
+Breath away, you take my breath away`
+      }
+    ]
+  },
+  {
     id: "la-derniere",
     title: "La dernière",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971654/Aujo/krctyn0gejpupks8h0nj.jpg?q=80&w=2070",
