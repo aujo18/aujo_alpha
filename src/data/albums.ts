@@ -14,12 +14,12 @@ export interface Album {
 export const albums: Album[] = [
   {
     id: "les-femmes",
-    title: "Les Femmes",
+    title: "Les femmes",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/mhes4eadejyc6xlc08wa",
     spotifyUrl: "https://bfan.link/les-femmes-1",
     songs: [
       {
-        title: "Les Femmes",
+        title: "Les femmes",
         lyrics: `On m’a demandé un beat catchy pour la radio
 Que mon kick, mon snare te rendent esclave de mon tempo
 Loin de là, l’intention de te retenir
