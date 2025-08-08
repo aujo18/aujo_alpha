@@ -13,6 +13,51 @@ export interface Album {
 
 export const albums: Album[] = [
   {
+    id: "nulle-part",
+    title: "Nulle part",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/nulle_part_aujo_jkj1wh",
+    spotifyUrl: "https://bfan.link/nulle-part-1",
+    songs: [
+      {
+        title: "Nulle part",
+        lyrics: `Deux éclats d’azur qui hantent mes nuits
+Oh tu sais combien j’aime ça when it gets flirty
+Une image vaut mille mots
+Mais j’suis bouche bée
+Devant ta photo
+Damn I love the game we play
+
+When you’re out of the town
+Tu me textes et ça déraille
+Dépourvu de mes sens
+Mon cœur naïf s’emballe
+Tu Shakes , shakes it up
+Ma planète et tu repars
+Partout dans mon phone
+Quand j’lève les yeux t’es nulle part
+(Nulle part)
+
+C’est blurry mes doigts cherchent ton nom
+Un autre drunk text qui va fly dans ta boîte de réception
+Jsuis sur une genre de mission
+J’aime quand tu penses à moi
+Et j’sais qu’taimes ça quand j’pense à toi
+
+When you’re out of the town
+Tu me textes et ça déraille
+Dépourvu de mes sens
+Mon cœur naïf s’emballe
+Tu Shakes , shakes it up
+Ma planète et tu repars
+Partout dans mon phone
+Quand j’lève les yeux t’es nulle part
+(Nulle part)
+
+Nulle part , nulle part , nulle part`
+      }
+    ]
+  },
+  {
     id: "les-femmes",
     title: "Les femmes",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/mhes4eadejyc6xlc08wa",
