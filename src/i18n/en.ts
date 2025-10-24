@@ -27,7 +27,7 @@ export const en = {
   
   // Concerts section
   concerts: {
-    title: "Upcoming Shows",
+    title: "Shows",
     subtitle: "Come see me perform live"
   },
   
