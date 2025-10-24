@@ -32,6 +32,11 @@ const { title, description, canonicalURL = Astro.url.href, image = '/placeholder
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content="Aujo, singer-songwriter, music, Quebec, R&B, pop, rap, auteure-compositrice-interprète" />
+    <meta name="author" content="Aujo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content={locale} />
+    <meta name="revisit-after" content="7 days" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -49,6 +54,39 @@ const { title, description, canonicalURL = Astro.url.href, image = '/placeholder
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Hreflang for internationalization -->
+    <link rel="alternate" hreflang="en" href="https://www.aujo.ca/" />
+    <link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/" />
+    <link rel="alternate" hreflang="x-default" href="https://www.aujo.ca/" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aujo",
+      "description": "{description}",
+      "url": "{canonicalURL}",
+      "image": "{new URL(image, canonicalURL).href}",
+      "sameAs": [
+        "https://aujo.link/spotify",
+        "https://aujo.link/apple",
+        "https://aujo.link/youtube",
+        "https://aujo.link/tiktok",
+        "https://aujo.link/facebook",
+        "https://aujo.link/instagram"
+      ],
+      "jobTitle": "Singer-Songwriter",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Aujo"
+      },
+      "alumniOf": "Beauharnois",
+      "knowsAbout": ["Music", "Songwriting", "R&B", "Pop", "Rap"],
+      "inLanguage": "{locale}"
+    }
+    </script>
   </head>
   <body class="bg-white text-neutral-900 font-inter">
     <main>

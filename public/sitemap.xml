@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.aujo.ca/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/en/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/fr/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/boutique/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/en/lyrics/all-of-your-love/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/all-of-your-love/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/all-of-your-love/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/en/lyrics/nulle-part/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/nulle-part/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/nulle-part/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/en/lyrics/les-femmes/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/les-femmes/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/les-femmes/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/en/lyrics/la-derniere/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/la-derniere/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/la-derniere/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/fr/lyrics/all-of-your-love/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/all-of-your-love/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/all-of-your-love/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/fr/lyrics/nulle-part/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/nulle-part/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/nulle-part/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/fr/lyrics/les-femmes/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/les-femmes/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/les-femmes/" />
+  </url>
+  <url>
+    <loc>https://www.aujo.ca/fr/lyrics/la-derniere/</loc>
+    <lastmod>2025-01-27T17:31:00.000Z</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.aujo.ca/en/lyrics/la-derniere/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.aujo.ca/fr/lyrics/la-derniere/" />
+  </url>
+</urlset>
