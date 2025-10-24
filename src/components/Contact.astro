@@ -1,8 +1,15 @@
+---
+import { translations } from '../i18n/index.js';
+
+const { locale = 'en' } = Astro.props;
+const t = translations[locale as keyof typeof translations];
+---
+
 <section id="contact" class="py-20 bg-white">
   <div class="container mx-auto px-6">
-    <h2 class="font-archivo text-4xl md:text-5xl text-center mb-16 text-neutral-900">CONTACT</h2>
+    <h2 class="font-archivo text-4xl md:text-5xl text-center mb-16 text-neutral-900">{t.contact.title}</h2>
     <div class="max-w-2xl mx-auto text-center">
-      <p class="text-xl mb-8 text-neutral-600">Pour toute demande professionnelle, contactez mon équipe :</p>
+      <p class="text-xl mb-8 text-neutral-600">{locale === 'en' ? 'For any professional inquiries, contact my team:' : 'Pour toute demande professionnelle, contactez mon équipe :'}</p>
       <div class="space-y-4">
         <p>
           <span class="text-neutral-500">Management :</span>

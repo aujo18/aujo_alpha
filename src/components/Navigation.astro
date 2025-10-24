@@ -1,20 +1,23 @@
 ---
 import CartButton from './CartButton.astro';
+import { translations } from '../i18n/index.js';
+
 // Ajouter une prop isFixed avec une valeur par défaut à true
-const { isFixed = true } = Astro.props;
+const { isFixed = true, locale = 'en' } = Astro.props;
+const t = translations[locale as keyof typeof translations];
 
 const links = [
-  { href: "/", text: "ACCUEIL" },
-  { href: "/#musique", text: "MUSIQUE" },
-  /*{ href: "/#concerts", text: "SPECTACLES" },*/
-  { href: "/#contact", text: "CONTACT" },
+  { href: locale === 'en' ? "/" : "/fr", text: t.nav.home },
+  { href: locale === 'en' ? "/#music" : "/fr#musique", text: t.nav.music },
+  /*{ href: locale === 'en' ? "/#concerts" : "/fr#concerts", text: t.nav.concerts },*/
+  { href: locale === 'en' ? "/#contact" : "/fr#contact", text: t.nav.contact },
 ];
 ---
 
 <!-- Utiliser une classe conditionnelle pour le header -->
 <header class={`w-full bg-white/80 backdrop-blur-sm z-50 border-b border-neutral-100 ${isFixed ? 'fixed' : ''}`}>
   <nav class="container mx-auto px-6 py-4">
-    <ul class="flex justify-center space-x-8">
+    <ul class="flex justify-center items-center space-x-8">
       {
         links.map((link) => (
           <li>
@@ -27,6 +30,22 @@ const links = [
           </li>
         ))
       }
+      <!-- Sélecteur de langue -->
+      <li class="ml-4 flex space-x-2">
+        <a 
+          href="/" 
+          class={`px-2 py-1 text-sm transition-colors duration-300 ${locale === 'en' ? 'text-primary-600 font-semibold' : 'text-neutral-600 hover:text-primary-600'}`}
+        >
+          EN
+        </a>
+        <span class="text-neutral-300">|</span>
+        <a 
+          href="/fr" 
+          class={`px-2 py-1 text-sm transition-colors duration-300 ${locale === 'fr' ? 'text-primary-600 font-semibold' : 'text-neutral-600 hover:text-primary-600'}`}
+        >
+          FR
+        </a>
+      </li>
       <!-- Bouton de panier temporairement désactivé
       <li class="ml-4">
         <CartButton />

@@ -10,13 +10,14 @@ interface Props {
   description: string;
   canonicalURL?: string;
   image?: string;
+  locale?: string;
 }
 
-const { title, description, canonicalURL = Astro.url.href, image = '/placeholder-social.jpg' } = Astro.props;
+const { title, description, canonicalURL = Astro.url.href, image = '/placeholder-social.jpg', locale = 'en' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="fr" class="scroll-smooth">
+<html lang={locale} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -53,7 +54,7 @@ const { title, description, canonicalURL = Astro.url.href, image = '/placeholder
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer locale={locale} />
   </body>
 </html>
 

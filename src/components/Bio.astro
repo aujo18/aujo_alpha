@@ -1,8 +1,15 @@
-<section id="bio" class="py-20 bg-white">
+---
+import { translations } from '../i18n/index.js';
+
+const { locale = 'en' } = Astro.props;
+const t = translations[locale as keyof typeof translations];
+---
+
+<section id={locale === 'en' ? 'about' : 'bio'} class="py-20 bg-white">
   <div class="container mx-auto px-6">
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-xl text-neutral-600">
-        Native de Beauharnois, Aujo est une auteure-compositrice-interprète aux influences éclectiques, mêlant habilement R&B, rap et pop pour créer un son unique, à la fois moderne et intemporel. Véritable alchimiste des genres, elle explore les rythmes urbains et les mélodies pop avec une touche des plus personnelles.
+        {t.bio.content}
       </p>
     </div>
   </div>

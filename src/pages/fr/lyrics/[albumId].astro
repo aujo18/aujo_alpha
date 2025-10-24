@@ -1,7 +1,8 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navigation from '../../components/Navigation.astro';
-import { albums } from '../../data/albums';
+import Layout from '../../../layouts/Layout.astro';
+import Navigation from '../../../components/Navigation.astro';
+import { albums } from '../../../data/albums';
+import { translations } from '../../../i18n/index.js';
 
 export function getStaticPaths() {
   return albums.map(album => ({
@@ -11,13 +12,15 @@ export function getStaticPaths() {
 }
 
 const { album } = Astro.props;
+const locale = 'fr';
+const t = translations[locale];
 const title = `${album.title} - Paroles | Aujo`;
 const description = `Découvrez les paroles des chansons de l'album ${album.title} par Aujo.`;
-const canonicalURL = `${Astro.site}/lyrics/${album.id}/`;
+const canonicalURL = `${Astro.site}/fr/lyrics/${album.id}/`;
 ---
 
-<Layout title={title} description={description} canonicalURL={canonicalURL}>
-  <Navigation />
+<Layout title={title} description={description} canonicalURL={canonicalURL} locale={locale}>
+  <Navigation locale={locale} />
   <main class="pt-24 pb-20">
     <div class="container mx-auto px-6">
       <div class="max-w-5xl mx-auto">
@@ -106,7 +109,7 @@ const canonicalURL = `${Astro.site}/lyrics/${album.id}/`;
 
         <div class="text-center">
           <a
-            href="/#musique"
+            href="/fr#musique"
             class="inline-flex items-center gap-2 px-6 py-2 bg-white text-primary-600 rounded border border-primary-600 hover:bg-primary-50 transition-colors duration-300"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

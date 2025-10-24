@@ -1,6 +1,13 @@
-<section id="concerts" class="py-20 bg-neutral-50">
+---
+import { translations } from '../i18n/index.js';
+
+const { locale = 'en' } = Astro.props;
+const t = translations[locale as keyof typeof translations];
+---
+
+<section id={locale === 'en' ? 'concerts' : 'spectacles'} class="py-20 bg-neutral-50">
   <div class="container mx-auto px-6">
-    <h2 class="font-archivo text-4xl md:text-5xl text-center mb-16 text-neutral-900">SPECTACLES</h2>
+    <h2 class="font-archivo text-4xl md:text-5xl text-center mb-16 text-neutral-900">{t.concerts.title}</h2>
     <div class="max-w-4xl mx-auto">
       <div id="seated-55fdf2c0" data-artist-id="75c60439-038f-4d0c-8668-64cc24386b07" data-css-version="3"></div>
     </div>
