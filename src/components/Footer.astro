@@ -3,7 +3,6 @@ import { translations } from '../i18n/index.js';
 
 const { locale = 'en' } = Astro.props;
 const t = translations[locale as keyof typeof translations];
-const currentYear = new Date().getFullYear();
 ---
 
 <footer class="bg-neutral-100 py-8">

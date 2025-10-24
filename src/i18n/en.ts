@@ -41,7 +41,7 @@ export const en = {
   
   // Footer
   footer: {
-    copyright: "© 2024 Aujo. All rights reserved."
+    copyright: `© ${new Date().getFullYear()} Aujo. All rights reserved.`
   },
   
   // Meta
