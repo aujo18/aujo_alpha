@@ -42,7 +42,8 @@ You were everything to me
 And you’re still the one as the years go by
 But we went separate ways
 It kills me everyday
-Cause we were two sick kids learning how to surviveIn this crazy world, in this wild wild life
+Cause we were two sick kids learning how to survive
+In this crazy world, in this wild wild life
 We were singing out loud to the radio
 Now I’m sitting by the phone and I can’t let go
 
