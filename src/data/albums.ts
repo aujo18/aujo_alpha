@@ -13,6 +13,51 @@ export interface Album {
 
 export const albums: Album[] = [
   {
+    id: "all-of-your-love",
+    title: "All of your love",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1761279160/Aujo/all-of-your-love_kvvrli.jpg",
+    spotifyUrl: "https://bfan.link/all-of-your-love",
+    songs: [
+      {
+        title: "All of your love",
+        lyrics: `I bet that you don’t care
+I know it’s been a couple years now
+Life is so unfair
+If only you could meet me where
+Where we used to lay every single night
+You were holding my body so so tight
+We were dancing like there’s no tomorrow
+Now I’m staring at the ceiling and I miss you so
+
+Give me give me give me
+All of your love
+I need to feel it feel it
+I can’t get enough
+Stay a little little longer
+I’ll make you feel right
+Pull me closer closer closer
+T’il the end of the night
+
+You were everything to me
+And you’re still the one as the years go by
+But we went separate ways
+It kills me everyday
+Cause we were two sick kids learning how to surviveIn this crazy world, in this wild wild life
+We were singing out loud to the radio
+Now I’m sitting by the phone and I can’t let go
+
+Give me give me give me
+All of your love
+I need to feel it feel it
+I can’t get enough
+Stay a little little longer
+I’ll make you feel right
+Pull me closer closer closer
+T’il the end of the night`
+      }
+    ]
+  },
+  {
     id: "nulle-part",
     title: "Nulle part",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/f_auto,q_auto/v1/Aujo/nulle_part_aujo_jkj1wh",
