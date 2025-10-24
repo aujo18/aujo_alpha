@@ -17,21 +17,25 @@ const links = [
 <!-- Utiliser une classe conditionnelle pour le header -->
 <header class={`w-full bg-white/80 backdrop-blur-sm z-50 border-b border-neutral-100 ${isFixed ? 'fixed' : ''}`}>
   <nav class="container mx-auto px-6 py-4">
-    <ul class="flex justify-center items-center space-x-8">
-      {
-        links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="text-neutral-900 hover:text-primary-600 transition-colors duration-300"
-            >
-              {link.text}
-            </a>
-          </li>
-        ))
-      }
-      <!-- Sélecteur de langue -->
-      <li class="ml-4 flex space-x-2">
+    <div class="flex justify-between items-center">
+      <!-- Liens de navigation centrés -->
+      <ul class="flex space-x-8">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-neutral-900 hover:text-primary-600 transition-colors duration-300"
+              >
+                {link.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      
+      <!-- Sélecteur de langue à droite -->
+      <div class="flex space-x-2">
         <a 
           href="/" 
           class={`px-2 py-1 text-sm transition-colors duration-300 ${locale === 'en' ? 'text-primary-600 font-semibold' : 'text-neutral-600 hover:text-primary-600'}`}
@@ -45,12 +49,7 @@ const links = [
         >
           FR
         </a>
-      </li>
-      <!-- Bouton de panier temporairement désactivé
-      <li class="ml-4">
-        <CartButton />
-      </li>
-      -->
-    </ul>
+      </div>
+    </div>
   </nav>
 </header>
