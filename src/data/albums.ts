@@ -13,6 +13,53 @@ export interface Album {
 
 export const albums: Album[] = [
   {
+    id: "pain-sandwich",
+    title: "Pain sandwich",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1764549950/Aujo/painsandwich_aujo_tcr1ia.jpg",
+    spotifyUrl: "https://bfan.link/pain-sandwich",
+    songs: [
+      {
+        title: "Pain sandwich",
+        lyrics: `La table est mise, ta chaise est vide 
+Le bain est rempli d’bottes d’hiver 
+On rit ben fort, mais c’est pas facile 
+Car cette année il manque une paire 
+
+J’ai pensé faire un pain sandwich 
+Pour me mettre dans le mood 
+La parade avance 
+Mais d’mon coté y’a rien qui bouge 
+J’me cacherais dans un coin
+En attendant qu’quelqu’un me trouve
+J’sais ben qu’t’es plus là
+Mais j’joue encore à cherche et trouve
+
+Les lumières s’allument, mais une reste éteinte 
+J’m’en aperçois entre deux bouchées de tourtière
+C’est toi l’ange sur le top du sapin 
+Les années passent, j’arrive pas à m’y faire 
+
+J’ai pensé faire un pain sandwich 
+Pour me mettre dans le mood 
+La parade avance 
+Mais d’mon coté y’a rien qui bouge 
+J’me cacherais dans un coin
+En attendant qu’quelqu’un me trouve
+J’sais ben qu’t’es plus là
+Mais j’joue encore à cherche et trouve
+
+J’ai pensé faire un pain sandwich 
+Pour me mettre dans le mood 
+La parade avance 
+Mais d’mon coté y’a rien qui bouge 
+J’me cacherais dans un coin
+En attendant qu’quelqu’un me trouve
+J’sais ben qu’t’es plus là
+Mais j’joue encore à cherche et trouve`
+      }
+    ]
+  },
+  {
     id: "all-of-your-love",
     title: "All of your love",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1761279160/Aujo/all-of-your-love_kvvrli.jpg",
@@ -212,7 +259,7 @@ Au revoir`
       }
     ]
   }
-  
+
   /*,
   {
     id: "laube-nouvelle",
