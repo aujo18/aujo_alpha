@@ -14,12 +14,12 @@ export interface Album {
 export const albums: Album[] = [
   {
     id: "pain-sandwich",
-    title: "Pain sandwich",
+    title: "Pain Sandwich",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1764549950/Aujo/painsandwich_aujo_tcr1ia.jpg",
     spotifyUrl: "https://bfan.link/pain-sandwich",
     songs: [
       {
-        title: "Pain sandwich",
+        title: "Pain Sandwich",
         lyrics: `La table est mise, ta chaise est vide 
 Le bain est rempli d’bottes d’hiver 
 On rit ben fort, mais c’est pas facile 
