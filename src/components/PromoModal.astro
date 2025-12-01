@@ -7,8 +7,8 @@ interface Props {
 
 const { locale } = Astro.props;
 
-// The latest album is the one we want to promote (Pain sandwich)
-const latestAlbum = albums.find(album => album.id === 'pain-sandwich') || albums[0];
+// The latest album is the first one in the array (newest first)
+const latestAlbum = albums[0];
 
 const translations = {
   fr: {
