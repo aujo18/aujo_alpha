@@ -1,0 +1,105 @@
+---
+import { albums } from '../data/albums';
+
+interface Props {
+  locale: 'fr' | 'en';
+}
+
+const { locale } = Astro.props;
+
+// The latest album is the last one in the array
+const latestAlbum = albums[albums.length - 1];
+
+const translations = {
+  fr: {
+    listen: 'Écouter',
+    close: 'Fermer'
+  },
+  en: {
+    listen: 'Listen',
+    close: 'Close'
+  }
+};
+
+const t = translations[locale];
+---
+
+<div id="promo-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="relative bg-white dark:bg-zinc-900 p-8 rounded-xl shadow-2xl max-w-md w-full mx-4 transform scale-95 transition-transform duration-300 border border-white/10" id="promo-content">
+    <button id="close-promo" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white transition-colors" aria-label={t.close}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    
+    <div class="text-center">
+      <h2 id="modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-white font-archivo">{latestAlbum.title}</h2>
+      <div class="relative group">
+        <img 
+          src={latestAlbum.coverImage} 
+          alt={latestAlbum.title} 
+          class="w-64 h-64 object-cover mx-auto mb-8 rounded-lg shadow-xl group-hover:shadow-2xl transition-shadow duration-300"
+        />
+      </div>
+      <a 
+        href={latestAlbum.spotifyUrl} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-block bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-10 rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg uppercase tracking-wide text-sm"
+      >
+        {t.listen}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('promo-modal');
+  const content = document.getElementById('promo-content');
+  const closeBtn = document.getElementById('close-promo');
+
+  // Show modal on load if not previously closed
+  window.addEventListener('load', () => {
+    // Check if we've already shown it this session
+    if (!sessionStorage.getItem('promoModalSeen')) {
+      setTimeout(() => {
+        modal?.classList.remove('hidden');
+        // Small delay to allow display:block to apply before opacity transition
+        requestAnimationFrame(() => {
+          modal?.classList.remove('opacity-0');
+          content?.classList.remove('scale-95');
+          content?.classList.add('scale-100');
+        });
+      }, 1000); // Delay appearance slightly for effect
+    }
+  });
+
+  const closeModal = () => {
+    modal?.classList.add('opacity-0');
+    content?.classList.remove('scale-100');
+    content?.classList.add('scale-95');
+    
+    setTimeout(() => {
+      modal?.classList.add('hidden');
+    }, 300);
+    
+    // Mark as seen so it doesn't pop up again this session
+    sessionStorage.setItem('promoModalSeen', 'true');
+  };
+
+  closeBtn?.addEventListener('click', closeModal);
+
+  // Close on click outside
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+</script>

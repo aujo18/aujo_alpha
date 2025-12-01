@@ -6,6 +6,7 @@ import Bio from '../../components/Bio.astro';
 import Music from '../../components/Music.astro';
 import Concerts from '../../components/Concerts.astro';
 import Contact from '../../components/Contact.astro';
+import PromoModal from '../../components/PromoModal.astro';
 import { translations } from '../../i18n/index.js';
 
 const locale = 'fr';
@@ -24,6 +25,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <Music locale={locale} />
     <Concerts locale={locale} />
     <Contact locale={locale} />
+    <PromoModal locale={locale} />
   </main>
 </Layout>
 
