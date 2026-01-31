@@ -13,6 +13,57 @@ export interface Album {
 
 export const albums: Album[] = [
   {
+    id: "trop-flou",
+    title: "Trop flou",
+    coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1769894239/Aujo/tropflou_dilups.jpg",
+    spotifyUrl: "https://bfan.link/trop-flou",
+    songs: [
+      {
+        title: "Trop flou",
+        lyrics: `Notre timing était off
+Les souvenirs ont pris la porte
+Tu te souviens mais c’est trop flou
+Te souviens mais c’est trop flou
+
+J’dessine un portrait de ton visage
+De tes grands yeux marrons
+J’tavoue que ça fait un bail
+Assez pour en perdre la raison
+Ta voix est un écho
+Qui résonne en ver d’oreille
+J’ai manqué le bateau
+Et t’as navigué vers le soleil
+
+Notre timing était off
+Les souvenirs ont pris la porte
+Tu te souviens mais c’est trop flou
+Te souviens mais c’est trop flou
+Dans un different timeline
+We fit together so fine
+On se souvient mais c’est trop flou
+Se souvient mais c’est trop flou
+
+J’te cherche toujours partout dans la foule
+J’fais comme si j’men fou I keep my cool
+Et please toi dis moi sans mentir
+Combien de fois que t’as scroll sur mon feed?
+I feel good j’ai fait ma vie, j’ai plus de peine et t’as fait la
+tienne
+Mais y’a ton reflet qui me hante
+Quand j’me retrouve avec moi même en silence
+
+Même à des années lumière de distance
+On se reconnaît c’est une évidence
+Bien plus deep que des simples coïncidences
+Ton parfum fuel mon cœur, mon âme comme de l’essence
+You will never be mine in this life
+Peut être que dans la prochaine on aura plus de chance
+Its too bad but im alright
+T’es toujours dans ma tête y’a rien qui change`
+      }
+    ]
+  },
+  {
     id: "pain-sandwich",
     title: "Pain Sandwich",
     coverImage: "https://res.cloudinary.com/dxyvj8rka/image/upload/v1764549950/Aujo/painsandwich_aujo_tcr1ia.jpg",
