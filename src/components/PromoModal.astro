@@ -1,5 +1,5 @@
 ---
-import { albums } from '../data/albums';
+import { getPromoModal } from '../lib/contentful';
 
 interface Props {
   locale: 'fr' | 'en';
@@ -7,18 +7,12 @@ interface Props {
 
 const { locale } = Astro.props;
 
-// The latest album is the first one in the array (newest first)
-const latestAlbum = albums[0];
+const promo = await getPromoModal();
+if (!promo) return;
 
 const translations = {
-  fr: {
-    listen: 'Écouter',
-    close: 'Fermer'
-  },
-  en: {
-    listen: 'Listen',
-    close: 'Close'
-  }
+  fr: { listen: 'Écouter', close: 'Fermer' },
+  en: { listen: 'Listen',  close: 'Close'   }
 };
 
 const t = translations[locale];
@@ -31,19 +25,19 @@ const t = translations[locale];
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
-    
+
     <div class="text-center">
-      <h2 id="modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-white font-archivo">{latestAlbum.title}</h2>
+      <h2 id="modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-white font-archivo">{promo.title}</h2>
       <div class="relative group">
-        <img 
-          src={latestAlbum.coverImage} 
-          alt={latestAlbum.title} 
+        <img
+          src={promo.coverImage}
+          alt={promo.title}
           class="w-64 h-64 object-cover mx-auto mb-8 rounded-lg shadow-xl group-hover:shadow-2xl transition-shadow duration-300"
         />
       </div>
-      <a 
-        href={latestAlbum.spotifyUrl} 
-        target="_blank" 
+      <a
+        href={promo.spotifyUrl}
+        target="_blank"
         rel="noopener noreferrer"
         class="inline-block bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-10 rounded-full transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg uppercase tracking-wide text-sm"
       >
@@ -58,19 +52,16 @@ const t = translations[locale];
   const content = document.getElementById('promo-content');
   const closeBtn = document.getElementById('close-promo');
 
-  // Show modal on load if not previously closed
   window.addEventListener('load', () => {
-    // Check if we've already shown it this session
     if (!sessionStorage.getItem('promoModalSeen')) {
       setTimeout(() => {
         modal?.classList.remove('hidden');
-        // Small delay to allow display:block to apply before opacity transition
         requestAnimationFrame(() => {
           modal?.classList.remove('opacity-0');
           content?.classList.remove('scale-95');
           content?.classList.add('scale-100');
         });
-      }, 1000); // Delay appearance slightly for effect
+      }, 1000);
     }
   });
 
@@ -78,28 +69,13 @@ const t = translations[locale];
     modal?.classList.add('opacity-0');
     content?.classList.remove('scale-100');
     content?.classList.add('scale-95');
-    
-    setTimeout(() => {
-      modal?.classList.add('hidden');
-    }, 300);
-    
-    // Mark as seen so it doesn't pop up again this session
+    setTimeout(() => { modal?.classList.add('hidden'); }, 300);
     sessionStorage.setItem('promoModalSeen', 'true');
   };
 
   closeBtn?.addEventListener('click', closeModal);
-
-  // Close on click outside
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-  
-  // Close on Escape key
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
-      closeModal();
-    }
+    if (e.key === 'Escape' && !modal?.classList.contains('hidden')) closeModal();
   });
 </script>

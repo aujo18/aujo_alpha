@@ -1,5 +1,7 @@
 ---
-import { albums } from '../data/albums';
+import { getAlbums, mapAlbum } from '../lib/contentful';
+
+const albums = (await getAlbums()).map(mapAlbum);
 import { translations } from '../i18n/index.js';
 
 const { locale = 'en' } = Astro.props;

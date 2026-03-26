@@ -1,10 +1,11 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Navigation from '../../../components/Navigation.astro';
-import { albums } from '../../../data/albums';
+import { getAlbums, mapAlbum } from '../../../lib/contentful';
 import { translations } from '../../../i18n/index.js';
 
-export function getStaticPaths() {
+export async function getStaticPaths() {
+  const albums = (await getAlbums()).map(mapAlbum);
   return albums.map(album => ({
     params: { albumId: album.id },
     props: { album },
