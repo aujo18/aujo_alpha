@@ -41,6 +41,7 @@ export interface AlbumSkeleton {
     coverImage: EntryFieldTypes.AssetLink;
     spotifyUrl: EntryFieldTypes.Text;
     songs: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<SongSkeleton>>;
+    order: EntryFieldTypes.Integer;
   };
 }
 
@@ -76,7 +77,7 @@ export const contentfulClient = createClient();
 export async function getAlbums() {
   const response = await contentfulClient.getEntries<AlbumSkeleton>({
     content_type: "album",
-    order: ["-sys.createdAt"],
+    order: ["-fields.order"],
     include: 1,
   });
 
