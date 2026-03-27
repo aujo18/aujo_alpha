@@ -99,6 +99,38 @@ export async function getAlbumBySlug(slug: string) {
 }
 
 /**
+ * Hero slider images.
+ * Contentful content type ID: "heroSlider"
+ *
+ * There should be exactly one entry of this type.
+ * Reorder images directly in Contentful to change the slider order.
+ */
+export interface HeroSliderSkeleton {
+  contentTypeId: "heroSlider";
+  fields: {
+    images: EntryFieldTypes.Array<EntryFieldTypes.AssetLink>;
+  };
+}
+
+/**
+ * Returns the ordered list of hero image URLs, or an empty array if not found.
+ */
+export async function getHeroImages(): Promise<string[]> {
+  const response = await contentfulClient.getEntries<HeroSliderSkeleton>({
+    content_type: "heroSlider",
+    limit: 1,
+    include: 1,
+  });
+
+  const entry = response.items[0];
+  if (!entry) return [];
+
+  return ((entry.fields.images ?? []) as Asset[])
+    .filter((asset) => asset?.fields?.file?.url)
+    .map((asset) => `https:${asset.fields.file!.url}`);
+}
+
+/**
  * Controls the promo modal that appears on page load.
  * Contentful content type ID: "promoModal"
  *

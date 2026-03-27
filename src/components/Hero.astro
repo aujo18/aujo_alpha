@@ -1,37 +1,27 @@
 ---
+import { getHeroImages } from '../lib/contentful';
 import { translations } from '../i18n/index.js';
 
 const { locale = 'en' } = Astro.props;
 const t = translations[locale as keyof typeof translations];
+
+const heroImages = await getHeroImages();
 ---
 
 <section id={locale === 'en' ? 'home' : 'accueil'} class="min-h-screen flex items-center justify-center relative overflow-hidden">
   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white z-10"></div>
-  
+
   <!-- Slider container -->
   <div class="slider-container absolute inset-0">
-    <!-- Images du slider -->
-    <div class="slider-image absolute inset-0 w-full h-full opacity-100 transition-opacity duration-1500 ease-in-out">
-      <img 
-        src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1761486431/Aujo/aujo_hero01_otq9lk.jpg"
-        alt="Aujo"
-        class="w-full h-full object-cover opacity-80"
-      />
-    </div>
-    <div class="slider-image absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1500 ease-in-out">
-      <img 
-        src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1739971664/Aujo/vfbmv044jb9dgukbc8pm.jpg?q=80&w=2070"
-        alt="Artiste en performance"
-        class="w-full h-full object-cover opacity-80"
-      />
-    </div>
-    <div class="slider-image absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1500 ease-in-out">
-      <img 
-        src="https://res.cloudinary.com/dxyvj8rka/image/upload/v1741020578/Aujo/cgysbu9ue4yxat96uv5s.jpg"
-        alt="Aujo"
-        class="w-full h-full object-cover opacity-80"
-      />
-    </div>
+    {heroImages.map((src, index) => (
+      <div class={`slider-image absolute inset-0 w-full h-full transition-opacity duration-1500 ease-in-out ${index === 0 ? 'opacity-100' : 'opacity-0'}`}>
+        <img
+          src={src}
+          alt="Aujo"
+          class="w-full h-full object-cover opacity-80"
+        />
+      </div>
+    ))}
   </div>
   
   <div class="relative z-20 text-center px-4">
