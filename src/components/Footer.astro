@@ -77,10 +77,14 @@ const t = translations[locale as keyof typeof translations];
     position: relative;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    min-height: 29px;
     color: currentColor;
     transition: opacity 0.15s;
     flex-shrink: 0;
     text-decoration: none;
+    margin-left: 0.5rem;
   }
   .credits-link:hover {
     opacity: 0.8;
@@ -100,6 +104,7 @@ const t = translations[locale as keyof typeof translations];
     height: 29px;
     opacity: 0;
     transition: opacity 0.15s;
+    pointer-events: none;
   }
   .credits-link:hover svg {
     opacity: 1;
@@ -143,7 +148,7 @@ const t = translations[locale as keyof typeof translations];
       svg.setAttribute('width', '20'); svg.setAttribute('height', '29');
       svg.setAttribute('viewBox', '0 0 231 329');
       svg.setAttribute('aria-hidden', 'true');
-      svg.style.cssText = `position:absolute;inset:0;clip-path:url(#${clipId});transform:translateX(${offsetX}px);transition:transform 0.05s ease-out;`;
+      svg.style.cssText = `position:absolute;left:50%;top:50%;width:20px;height:29px;clip-path:url(#${clipId});transform:translate(calc(-50% + ${offsetX}px), -50%);transition:transform 0.05s ease-out;`;
       pathData.forEach((d, i) => {
         const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         p.setAttribute('fill', color); p.setAttribute('d', d);
@@ -173,8 +178,8 @@ const t = translations[locale as keyof typeof translations];
         const layer = createSvgLayer(id, randomHsl(), Math.random() * 10 - 5);
         link.appendChild(layer); layers.push(layer);
       });
-      setTimeout(() => layers.forEach(l => { l.style.transform = 'translateX(0px)'; }), 50);
-      setTimeout(() => layers.forEach(l => { l.style.transform = `translateX(${Math.random() * 5 - 2.5}px)`; }), 100);
+      setTimeout(() => layers.forEach(l => { l.style.transform = 'translate(calc(-50% + 0px), -50%)'; }), 50);
+      setTimeout(() => layers.forEach(l => { const ox = Math.random() * 5 - 2.5; l.style.transform = `translate(calc(-50% + ${ox}px), -50%)`; }), 100);
       setTimeout(() => {
         layers.forEach(l => l.remove()); svgDefs.remove(); animating = false;
         if (onComplete) onComplete();
