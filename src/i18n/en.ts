@@ -22,7 +22,9 @@ export const en = {
   // Music section
   music: {
     title: "Music",
-    subtitle: "Explore my discography"
+    subtitle: "Explore my discography",
+    prevAlbums: "Previous albums",
+    nextAlbums: "Next albums"
   },
   
   // Concerts section
